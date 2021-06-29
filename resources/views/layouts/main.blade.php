@@ -43,7 +43,6 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{Route('userAdmin.dinkes.index')}}">Admin Dinkes</a></li>
                         <li><a href="{{Route('userAdmin.puskesmas.index')}}">Puskesmas</a></li>
-                        <li><a href="dashboard_2.html">Jenis Obat</a></li>
                     </ul>
                 </li>
                 @endif
