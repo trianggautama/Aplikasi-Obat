@@ -15,6 +15,7 @@ class AuthController extends Controller
 
     public function login_store(Request $req)
     {
+        
         $credentials = $req->only('username', 'password');
 
         if (Auth::attempt($credentials)) 

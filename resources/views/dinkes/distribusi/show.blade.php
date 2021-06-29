@@ -49,7 +49,7 @@
                                 <tr>
                                     <td width="17%">Status Distribusi</td>
                                     <td width="3%">:</td>
-                                    <td>@if($d->status_distribusi == 1) belum di verifikasi  @else terverifikasi  @endif</td>
+                                    <td>@if($data->status_distribusi == 1) belum di verifikasi  @else terverifikasi  @endif</td>
                                 </tr>
                                 <tr>
                                     <td width="17%">Tanggal Diterima</td>
