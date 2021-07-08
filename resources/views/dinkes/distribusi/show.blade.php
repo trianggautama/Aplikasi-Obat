@@ -49,12 +49,12 @@
                                 <tr>
                                     <td width="17%">Status Distribusi</td>
                                     <td width="3%">:</td>
-                                    <td>@if($data->status_distribusi == 1) belum di verifikasi  @else terverifikasi  @endif</td>
+                                    <td>@if($data->status_distribusi == 1) <div class="badge badge-warning">belum di verifikasi</div>  @else <div class="badge badge-success">terverifikasi</div>  @endif</td>
                                 </tr>
                                 <tr>
                                     <td width="17%">Tanggal Diterima</td>
                                     <td width="3%">:</td>
-                                    <td>{{$data->tgl_diterima}}</td>
+                                    <td>{{Carbon\carbon::parse($data->tgl_diterima)->translatedFormat('d F Y')}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -66,6 +66,7 @@
                             <h5>Detail Distribusi</h5> 
                         </div>
                         <div class="ibox-content">
+                            @if($data->status_distribusi == 1)
                             <form action="{{Route('userDinkes.rincian_distribusi.store')}}" method="post">
                             @csrf
                                 <input type="hidden" name="distribusi_obat_id" id="distribusi_obat_id" value="{{$data->id}}">
@@ -85,6 +86,7 @@
                                 <button type="submit" class="btn btn-primary btn-block" >Tambah Rincian</button>
                             </form>
                             <hr>    
+                            @endif
                             <div class="alert alert-light">
                                 <div class="table-responsive">
                                     <table class="table table-hover table-bordered bg-white" id="example">
@@ -107,12 +109,16 @@
                                                     <td>{{Carbon\carbon::parse($r->stok_dinkes->tgl_exp)->translatedFormat('d F Y')}}</td>
                                                     <td>{{$r->volume}} {{$r->stok_dinkes->obat->satuan->satuan}}</td>
                                                     <td class="text-center">
-                                                        <form action="{{ route('userDinkes.rincian_distribusi.destroy',$r->id) }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <!-- <a href="{{Route('userDinkes.rincian_distribusi.edit',$r->id)}}" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</a> -->
-                                                            <button class="btn btn-sm btn-danger " type="submit"><i class="fa fa-trash" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"></i>&nbsp;Hapus</button>
-                                                        </form>
+                                                        @if($data->status_distribusi == 1)
+                                                            <form action="{{ route('userDinkes.rincian_distribusi.destroy',$r->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <!-- <a href="{{Route('userDinkes.rincian_distribusi.edit',$r->id)}}" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</a> -->
+                                                                <button class="btn btn-sm btn-danger " type="submit"><i class="fa fa-trash" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"></i>&nbsp;Hapus</button>
+                                                            </form>
+                                                        @else
+                                                        -
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

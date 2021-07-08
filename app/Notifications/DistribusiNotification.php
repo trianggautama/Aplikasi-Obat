@@ -58,9 +58,10 @@ class DistribusiNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'judul'=>$this->notif->judul,
-            'id'=>$this->notif->id,
-            'tanggal'=>$this->notif->tanggal,
+            'judul'     =>$this->notif->judul,
+            'id'        =>$this->notif->id,
+            'status'    =>$this->notif->status,
+            'tanggal'   =>$this->notif->tanggal,
         ];
     }
 }

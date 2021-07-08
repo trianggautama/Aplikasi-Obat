@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Distribusi_obat;
+use App\Models\Stok_dinkes;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -76,4 +77,29 @@ class MainController extends Controller
 
         return redirect()->route('userPuskesmas.profil')->with('success','Data Berhasil Diubah');
     }
+
+    public function dinkes_notif()
+    {
+        $notif = auth()->user()->notifications()->paginate(10);
+
+        return view('dinkes.notif',compact('notif'));
+    } 
+
+    public function dinkes_notif_detail($notif_id, $id)
+    {
+        auth()->user()->unreadNotifications->where('id',$notif_id)->markAsRead();
+
+        $data       = Distribusi_obat::findOrFail($id);
+        $stok       = Stok_dinkes::orderBy('obat_id')->get();
+        $rincian    = $data->rincian;
+
+        return view('dinkes.distribusi.show',compact('data','stok','rincian'));
+    }  
+
+    public function dinkes_notif_delete($id)
+    {
+        auth()->user()->notifications->where('id',$id)->first()->delete();
+
+        return redirect()->back()->with('success','Notifikasi Berhasil Dihapus');
+    } 
 }

@@ -55,6 +55,7 @@ class DistribusiController extends Controller
 
         $notif                   = collect([]);
         $notif->judul            = 'Pendistribusian Obat Baru';
+        $notif->status           = 'Distribusi';
         $notif->id               = $distribusi->id;
         $notif->tanggal          = $distribusi->created_at;
         $penerima                = Puskesmas::findOrFail($distribusi->puskesmas_id); 

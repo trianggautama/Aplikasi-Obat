@@ -39,12 +39,12 @@
                             </h5>
                         </div>
                         <div class="col-md text-right">
-                            <a href="{{route('userPuskesmas.notif.detail',['notif_id'=>$n->id,'id'=>$n->data['id']])}}" class="btn btn-primary text-white">
+                            <a href="{{route('userDinkes.notif.detail',['notif_id'=>$n->id,'id'=>$n->data['id']])}}" class="btn btn-primary text-white">
                                 <i class="fa fa-info-circle"></i>
                             </a>                    
-                            <a href="{{Route('userPuskesmas.notif.delete',['id'=>$n->id])}}" type="button" class="btn btn-secondary text-white">
+                            <!-- <a href="{{Route('userPuskesmas.notif.delete',['id'=>$n->id])}}" type="button" class="btn btn-secondary text-white">
                                 <i class="fa fa-trash"></i> 
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                 </div>

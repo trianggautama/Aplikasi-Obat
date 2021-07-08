@@ -32,7 +32,7 @@
                         </a>
                     </div>
                     <div class="logo-element">
-                        IN+
+                        <img src="{{asset('pemko.png')}}" alt="" width="30px">
                     </div>
                 </li>
                 @if(Auth::user()->role ==  'SuperAdmin')
@@ -49,33 +49,36 @@
                 @endif
                
                 @if(Auth::user()->role ==  'Dinkes')
-                <li>
-                    <a href="{{Route('userDinkes.beranda')}}"><i class="fa fa-home"></i> <span class="nav-label">Beranda </span></a>
-                </li>
-                <li> 
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Master Data</span> <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="{{Route('userDinkes.puskesmas.index')}}">User Puskesmas</a></li>
-                        <li><a href="{{Route('userDinkes.satuan.index')}}">Satuan Obat</a></li>
-                        <li><a href="{{Route('userDinkes.kategori.index')}}">Kategori Obat</a></li>
-                        <li><a href="{{Route('userDinkes.obat.index')}}">Macam Obat</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Obat</span> <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="{{Route('userDinkes.stok_dinkes.index')}}">Stok Obat</a></li>
-                        <li><a href="{{Route('userDinkes.distribusi.index')}}">Pendistribusian Obat</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Laporan Puskesmas</span> <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="dashboard_2.html">Permintaan Obat</a></li>
-                        <li><a href="dashboard_2.html">Pengeluaran Obat</a></li>
-                        <li><a href="dashboard_2.html">Berita Pemusnahan Obat</a></li>
-                    </ul>
-                </li>
+                    <li>
+                        <a href="{{Route('userDinkes.beranda')}}"><i class="fa fa-home"></i> <span class="nav-label">Beranda </span></a>
+                    </li>
+                    <li> 
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Master Data</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="{{Route('userDinkes.puskesmas.index')}}">User Puskesmas</a></li>
+                            <li><a href="{{Route('userDinkes.satuan.index')}}">Satuan Obat</a></li>
+                            <li><a href="{{Route('userDinkes.kategori.index')}}">Kategori Obat</a></li>
+                            <li><a href="{{Route('userDinkes.obat.index')}}">Macam Obat</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Obat</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="{{Route('userDinkes.stok_dinkes.index')}}">Stok Obat</a></li>
+                            <li><a href="{{Route('userDinkes.distribusi.index')}}">Pendistribusian Obat</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Laporan Puskesmas</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="dashboard_2.html">Permintaan Obat <small>(belum)</small></a></li>
+                            <li><a href="dashboard_2.html">Pengeluaran Obat <small>(belum)</small></a></li>
+                            <li><a href="dashboard_2.html">Berita Pemusnahan Obat <small>(belum)</small></a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="package.html"><i class="fa fa-print"></i> <span class="nav-label">Laporan <small>(belum)</small></span></a>
+                    </li>
                 @endif
                 @if(Auth::user()->role ==  'Puskesmas')
                 <li>
@@ -88,20 +91,17 @@
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Obat</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{Route('userPuskesmas.pemasukan.index')}}">Pemasukan Obat</a></li>
-                        <li><a href="dashboard_2.html">Pengeluaran Obat</a></li>
-                        <li><a href="#">Stok Obat</a></li>
+                        <li><a href="#">Pengeluaran Obat <small>(Belum)</small></a></li>
+                        <li><a href="#">Stok Obat <small>(Belum)</small></a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Lain-lain</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="dashboard_2.html">Pemusnahan Obat</a></li>
+                        <li><a href="#">Pemusnahan Obat <small>(Belum)</small></a></li>
                     </ul>
                 </li>
                 @endif
-                <li class="special_link">
-                    <a href="package.html"><i class="fa fa-print"></i> <span class="nav-label">Laporan</span></a>
-                </li>
             </ul>
 
         </div>
@@ -120,9 +120,15 @@
                     @php
                         $notif = Auth::user()->unreadNotifications;
                     @endphp
-                    <a class="count-info" href="{{Route('userPuskesmas.notif')}}">
-                        <i class="fa fa-bell"></i>  <span class="label label-warning">{{$notif->count()}}</span>
-                    </a>
+                    @if(Auth::user()->role == 'Dinkes')
+                        <a class="count-info" href="{{Route('userDinkes.notif')}}">
+                            <i class="fa fa-bell"></i>  <span class="label label-warning">{{$notif->count()}}</span>
+                        </a>
+                    @elseif(Auth::user()->role == 'Puskesmas')
+                        <a class="count-info" href="{{Route('userPuskesmas.notif')}}">
+                            <i class="fa fa-bell"></i>  <span class="label label-warning">{{$notif->count()}}</span>
+                        </a>
+                    @endif
                 </li>
                 <li>
                     <a href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -59,8 +59,10 @@
                                         @csrf
                                         @method('DELETE')
                                         <a href="{{Route('userDinkes.distribusi.show',$d->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-info-circle"></i> Detail</a>
-                                        <a href="{{Route('userDinkes.distribusi.edit',$d->id)}}" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</a>
-                                        <button class="btn btn-sm btn-danger " type="submit"><i class="fa fa-trash" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"></i>&nbsp;Hapus</button>
+                                        @if($d->status_distribusi == 1)
+                                            <a href="{{Route('userDinkes.distribusi.edit',$d->id)}}" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</a>
+                                            <button class="btn btn-sm btn-danger " type="submit"><i class="fa fa-trash" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"></i>&nbsp;Hapus</button>
+                                        @endif
                                         </form>
                                     </td>
                                 </tr>

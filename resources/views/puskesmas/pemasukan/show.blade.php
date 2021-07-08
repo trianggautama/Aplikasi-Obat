@@ -2,13 +2,13 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-sm-4">
-            <h2>Master Data</h2>
+            <h2>Pemasukan Obat</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="index.html">Master Data</a>
+                    <strong> Puskesmas</strong>
                 </li>
                 <li class="breadcrumb-item">
-                    <strong> Distribusi Obat</strong>
+                    <strong> Pemasukan obat</strong>
                 </li>
                 <li class="breadcrumb-item active">
                     <strong>Show</strong>
@@ -17,8 +17,11 @@
         </div>
         <div class="col-sm-8">
             <div class="title-action">
+                @if($data->status_distribusi == 1)
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-check-circle-o"></i> Verifikasi pemasukan Obat</button>
+                @endif
                 <a href="{{Route('userPuskesmas.pemasukan.index')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Kembali</a>
-            </div>
+            </div> 
         </div>
     </div>
 
@@ -49,7 +52,7 @@
                                 <tr>
                                     <td width="17%">Status Distribusi</td>
                                     <td width="3%">:</td>
-                                    <td>@if($data->status_distribusi == 1) belum di verifikasi  @else terverifikasi  @endif</td>
+                                    <td>@if($data->status_distribusi == 1) <div class="badge badge-warning">belum di verifikasi</div>  @else <div class="badge badge-success">terverifikasi</div>  @endif</td>
                                 </tr>
                                 <tr>
                                     <td width="17%">Tanggal Diterima</td>
@@ -99,6 +102,36 @@
             </div>
         </div>
 
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{Route('userPuskesmas.pemasukan.verif',$data->id)}}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="">Tanggal Diterima</label>
+                        <input type="date" name="tgl_diterima" class="form-control" value="{{Carbon\carbon::now()->format('Y-m-d')}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Catatan (optional)</label>
+                        <textarea name="catatan" id="" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary" name="formAdd">Simpan Verifikasi</button>
+                </div>
+                </form>
+                </div>
+            </div>
+        </div>
 @endsection
 @section('script')
 <script>

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Distribusi_obat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\DistribusiNotification;
+use Illuminate\Support\Facades\Notification;
 
 class PemasukanPuskesmasController extends Controller
 {
@@ -89,5 +92,24 @@ class PemasukanPuskesmasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function verif(Request $req, $id)
+    {
+        $data                       = Distribusi_obat::findorFail($id);
+        $input                      = $req->all(); 
+        $input['status_distribusi'] = 2 ;
+        $data->update($input); 
+
+        $notif                   = collect([]);
+        $notif->judul            = 'Distribusi telah di verifikasi';
+        $notif->status           = 'Distribusi';
+        $notif->id               = $data->id;
+        $notif->tanggal          = $data->created_at;
+        $penerima                = User::where('role','Dinkes')->get(); 
+         
+        Notification::send($penerima, new DistribusiNotification($notif)); 
+
+        return redirect()->route('userPuskesmas.pemasukan.show',$id)->with('success','Data Berhasil di verifikasi');
     }
 }
