@@ -90,11 +90,11 @@
                 <li>
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Obat</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
+                        <li><a href="{{Route('userPuskesmas.stok_puskesmas.index')}}">Stok Obat</a></li>
                         <li><a href="{{Route('userPuskesmas.pemasukan.index')}}">Pemasukan Obat</a></li>
                         <li><a href="#">Pengeluaran Obat <small>(Belum)</small></a></li>
-                        <li><a href="#">Stok Obat <small>(Belum)</small></a></li>
                     </ul>
-                </li>
+                </li> 
                 <li>
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Lain-lain</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">

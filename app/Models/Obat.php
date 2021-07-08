@@ -26,4 +26,9 @@ class Obat extends Model
         return $this->hasMany('App\Models\Stok_dinkes');
     }
 
+    public function stok_puskesmas() 
+    {
+        return $this->hasMany('App\Models\Stok_puskesmas');
+    }
+
 }

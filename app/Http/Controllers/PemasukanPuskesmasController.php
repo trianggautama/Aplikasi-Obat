@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Distribusi_obat;
+use App\Models\Stok_puskesmas;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -97,6 +98,14 @@ class PemasukanPuskesmasController extends Controller
     public function verif(Request $req, $id)
     {
         $data                       = Distribusi_obat::findorFail($id);
+        $data->rincian->map(function($r){
+            $r->obat_id   = $r->stok_dinkes->obat_id;
+            $r->tgl_exp   = $r->stok_dinkes->tgl_exp;
+            $r->kode_stok = $r->stok_dinkes->kode_stok;
+            $r->tgl_masuk = $r->distribusi->tgl_distribusi;
+            Stok_puskesmas::create($r->toArray());
+        });
+
         $input                      = $req->all(); 
         $input['status_distribusi'] = 2 ;
         $data->update($input); 

@@ -18,6 +18,6 @@ class Rincian_distribusi extends Model
 
     public function distribusi() 
     {
-        return $this->belongsto('App\Models\Distribusi_obat');
+        return $this->belongsto('App\Models\Distribusi_obat','distribusi_obat_id');
     }
 }

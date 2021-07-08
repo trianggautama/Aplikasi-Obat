@@ -2,20 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PostObatRequest;
-use App\Models\Kategori_obat;
 use App\Models\Obat;
-use App\Models\Satuan_obat;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ObatController extends Controller
+class StokPuskesmasController extends Controller
 {
-    public function __construct()
-    {
-        $this->kategori = Kategori_obat::orderBy('kategori')->get();
-        $this->satuan   = Satuan_obat::orderBy('satuan')->get();
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,11 +15,8 @@ class ObatController extends Controller
     public function index()
     {
         $data       = Obat::orderBy('nama_obat')->get();
-        $kategori   = $this->kategori;
-        $satuan     = $this->satuan;
 
-        return view('dinkes.obat.index',compact('data','kategori','satuan'));
-      
+        return view('puskesmas.stok_obat.index',compact('data'));
     }
 
     /**
@@ -39,7 +27,7 @@ class ObatController extends Controller
     public function create()
     {
         //
-    } 
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -47,10 +35,9 @@ class ObatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostObatRequest $req)
+    public function store(Request $request)
     {
-        Obat::create($req->all());
-        return redirect()->route('userDinkes.obat.index')->with('success','Data Berhasil Disimpan');
+        //
     }
 
     /**
@@ -62,10 +49,9 @@ class ObatController extends Controller
     public function show($id)
     {
         $data = Obat::findOrFail($id);
-        $stok = $data->stok_dinkes;
 
-        return view('dinkes.obat.show',compact('data','stok'));
-      
+        return view('puskesmas.stok_obat.show',compact('data'));
+
     }
 
     /**
@@ -76,11 +62,7 @@ class ObatController extends Controller
      */
     public function edit($id)
     {
-        $data = Obat::findOrFail($id);
-        $kategori   = $this->kategori;
-        $satuan     = $this->satuan;
-
-        return view('dinkes.obat.edit',compact('data','kategori','satuan'));
+        //
     }
 
     /**
@@ -90,12 +72,9 @@ class ObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostObatRequest $req, $id)
+    public function update(Request $request, $id)
     {
-        $data = Obat::findOrFail($id);
-        $data->update($req->all());
-
-        return redirect()->route('userDinkes.obat.index')->with('success','Data Berhasil di Ubah');
+        //
     }
 
     /**
@@ -106,10 +85,6 @@ class ObatController extends Controller
      */
     public function destroy($id)
     {
-        $data = Obat::findOrFail($id);
-        $data->delete();
-
-        return redirect()->route('userDinkes.obat.index')->with('success','Data Berhasil Dihapus');
+        //
     }
 }
- 

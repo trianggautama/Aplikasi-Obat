@@ -35,11 +35,11 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kode distribusi</th>
-                                    <th>puskesmas Tujuan</th>
                                     <th>Tanggal distribusi</th>
                                     <th>Status distribusi</th>
                                     <th>Tanggal Diterima</th>
                                     <th>Banyak Jenis obat</th>
+                                    <th>Status</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead> 
@@ -48,15 +48,12 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$d->kode_distribusi}}</td>
-                                    <td>{{$d->puskesmas->user->nama}}</td>
                                     <td> {{Carbon\carbon::parse($d->tgl_distribusi)->translatedFormat('d F Y')}}</td>
                                     <td>@if($d->status_distribusi == 1) belum di verifikasi  @else terverifikasi  @endif</td>
                                     <td>@if($d->tgl_diterima) {{Carbon\carbon::parse($d->tgl_diterima)->translatedFormat('d F Y')}} @else - @endif</td>
                                     <td>{{$d->rincian->count()}} Jenis Stok Obat</td>
+                                    <td>@if($d->status_distribusi == 1) <div class="badge badge-warning">belum di verifikasi</div>  @else <div class="badge badge-success">terverifikasi</div>  @endif</td>
                                     <td>
-                                        @if($d->status_distribusi == 1)
-                                            <button class="btn btn-sm btn-info" onclick="verif('{{$d->id}}','{{$d->kode_distribusi}}')"><i class="fa fa-check-circle"></i> Verifikasi</button>
-                                        @endif
                                         <a href="{{Route('userPuskesmas.pemasukan.show',$d->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-info-circle"></i> Detail</a>
                                     </td>
                                 </tr>
@@ -67,35 +64,6 @@
                     </div>
                 </div>
             </div>
-            </div>
-        </div>
-        <div class="modal fade" id="verif" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{Route('userPuskesmas.pemasukan.store')}}" method="POST" name="formAdd">
-                    @csrf
-                    <div class="form-group">
-                        <label for=""> Kode Distribusi</label>
-                        <input type="text" class="form-control" name="kode_distribusi" id="kode_distribusi" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for=""> Tanggal Diterima</label>
-                        <input type="date" class="form-control" name="tgl_diterima" value="{{Carbon\carbon::now()->format('Y-m-d')}}">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary" name="formAdd">Verifikasi</button>
-                </div>
-                </form>
-                </div>
             </div>
         </div>
 @endsection

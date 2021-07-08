@@ -48,5 +48,5 @@ Route::prefix('/user-puskesmas')->name('userPuskesmas.')->middleware('auth')->gr
     Route::post('/profil/update/{id}', [MainController::class, 'puskesmas_profil_update'])->name('profil_update'); 
     Route::resource('pemasukan', '\App\Http\Controllers\PemasukanPuskesmasController');
     Route::put('/pemasukan/verif/{id}', [PemasukanPuskesmasController::class, 'verif'])->name('pemasukan.verif');  
-
+    Route::resource('stok_puskesmas', '\App\Http\Controllers\StokPuskesmasController');
 });
