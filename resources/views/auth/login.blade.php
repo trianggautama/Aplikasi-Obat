@@ -19,12 +19,9 @@
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div style="padding-top: 150px;">
-        
-            <h3 >Welcome to IN+</h3>
-            <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
-                <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
-            </p>
-            <p>Login in. To see it in action.</p>
+            <img src="{{asset('pemko.png')}}" alt="" width="70px" class="mb-3">
+            <h3 class="m-0">Aplikasi Pendistribusian obat</h3>
+            <p class="m-0">Dinas Kesehatan Kota Banjarbaru</p>
             <form class="m-t" role="form" action="{{Route('loginStore')}}" method="POST">
             @csrf
                 <div class="form-group">
@@ -36,11 +33,8 @@
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
             </form>
-            <!-- <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p> -->
         </div>
     </div>
-
-    <!-- Mainly scripts -->
     <script src="{{asset('admin/js/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('admin/js/popper.min.js')}}"></script>
     <script src="{{asset('admin/js/bootstrap.js')}}"></script>

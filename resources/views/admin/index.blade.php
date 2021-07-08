@@ -2,30 +2,81 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-sm-4">
-            <h2>This is main title</h2>
+            <h2>Beranda Admin</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="index.html">This is</a>
+                    <a href="index.html">Admin</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <strong>Breadcrumb</strong>
+                    <strong>Beranda</strong>
                 </li>
             </ol>
-        </div>
-        <div class="col-sm-8">
-            <div class="title-action">
-                <a href="" class="btn btn-primary">This is action area</a>
-            </div>
         </div>
     </div>
 
     <div class="wrapper wrapper-content">
-        <div class="middle-box text-center animated fadeInRightBig">
-            <h3 class="font-bold">This is page content</h3>
-            <div class="error-desc">
-                You can create here any grid layout you want. And any variation layout you imagine:) Check out
-                main dashboard and other site. It use many different layout.
-                <br/><a href="index.html" class="btn btn-primary m-t">Dashboard</a>
+        <div class="row">
+            <div class="col-md">
+                <div class="widget style1 navy-bg">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa fa-users fa-5x"></i>
+                        </div>
+                        <div class="col-8 text-right">
+                            <span>User Dinas Kesehatan</span>
+                            <h2 class="font-bold">3 User</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="widget style1 lazur-bg">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa fa-users fa-5x"></i>
+                        </div>
+                        <div class="col-8 text-right">
+                            <span> User Puskesmas </span>
+                            <h2 class="font-bold">30 User</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="widget style1 yellow-bg">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa fa-file-text fa-5x"></i>
+                        </div> 
+                        <div class="col-8 text-right">
+                            <span> Jenis Obat </span>
+                            <h2 class="font-bold">12</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="col-md"><div class="widget style1 red-bg">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa fa-truck fa-5x"></i>
+                        </div>
+                        <div class="col-8 text-right">
+                            <span> pendistribusian Obat </span>
+                            <h2 class="font-bold">12</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Selamat Datang ( {{Auth::user()->nama}} )</h2>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores nostrum, minima numquam magni cum veniam necessitatibus optio rerum iure odio sequi doloribus ex architecto, error nesciunt laudantium possimus nulla est.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

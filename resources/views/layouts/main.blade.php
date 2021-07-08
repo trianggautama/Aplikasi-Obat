@@ -19,18 +19,16 @@
 </head>
 
 <body class="">
-
     <div id="wrapper">
-
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element">
-                        <img alt="image" class="rounded-circle" src="{{asset('admin/img/profile_small.jpg')}}"/>
+                    <div class="dropdown profile-element text-center">
+                        <img alt="image" class="rounded-circle" src="{{asset('user.png')}}" width="50px"/>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="block m-t-xs font-bold">David Williams</span>
-                            <span class="text-muted text-xs block">Art Director </span>
+                            <span class="block m-t-xs font-bold">{{Auth::user()->nama}}</span>
+                            <span class="text-muted text-xs block">{{Auth::user()->role}}</span>
                         </a>
                     </div>
                     <div class="logo-element">
@@ -38,6 +36,9 @@
                     </div>
                 </li>
                 @if(Auth::user()->role ==  'SuperAdmin')
+                <li>
+                    <a href="{{Route('userAdmin.beranda')}}"><i class="fa fa-home"></i> <span class="nav-label">Beranda </span></a>
+                </li>
                 <li>
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Master Data</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
