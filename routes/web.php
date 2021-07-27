@@ -6,8 +6,9 @@ use App\Http\Controllers\{
     MainController,AuthController,UserPuskesmasController,DistribusiController,PemasukanPuskesmasController
 };
 
-Route::get('/', [AuthController::class, 'login'])->name('login'); 
-Route::post('/', [AuthController::class, 'login_store'])->name('loginStore'); 
+Route::get('/', [MainController::class, 'depan'])->name('depan'); 
+Route::get('/login', [AuthController::class, 'login'])->name('login'); 
+Route::post('/login', [AuthController::class, 'login_store'])->name('loginStore'); 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
 
 

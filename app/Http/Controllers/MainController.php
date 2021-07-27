@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Hash;
 
 class MainController extends Controller
 {
+    public function depan()
+    {
+
+        return view('welcome');
+    }
+
     public function admin_beranda()
     {
 
