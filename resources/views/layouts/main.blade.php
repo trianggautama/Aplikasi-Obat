@@ -92,7 +92,7 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{Route('userPuskesmas.stok_puskesmas.index')}}">Stok Obat</a></li>
                         <li><a href="{{Route('userPuskesmas.pemasukan.index')}}">Pemasukan Obat</a></li>
-                        <li><a href="#">Pengeluaran Obat <small>(Belum)</small></a></li>
+                        <li><a href="{{Route('userPuskesmas.pengeluaran_puskesmas.index')}}">Pengeluaran Obat</a></li>
                     </ul>
                 </li> 
                 <li>

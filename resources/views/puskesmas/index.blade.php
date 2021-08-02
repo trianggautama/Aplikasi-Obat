@@ -19,14 +19,20 @@
     </div>
 
     <div class="wrapper wrapper-content">
-        <div class="middle-box text-center animated fadeInRightBig">
-            <h3 class="font-bold">This is page Dinkes</h3>
-            <div class="error-desc">
-                You can create here any grid layout you want. And any variation layout you imagine:) Check out
-                main dashboard and other site. It use many different layout.
-                <br/><a href="index.html" class="btn btn-primary m-t">Dashboard</a>
-            </div>
-        </div>
+    <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <img src="{{asset('depan/img/hero-area.jpg')}}" alt="" width="100%" height="55%">
+                    <br>
+                    <div class="text-center p-4">
+                        <h1>Visi dan Misi</h1>
+                        <p >Dinas Kesehatan Kota Banjarbaru memiliki visi Terwujudnya pelayanan kesehatan yang holistik dan berkarakter, dengan sejumlah misi sebagai berikut: Meningkatkan kesehatan ibu dan anak serta gizi masyarakat, kesehatan lingkungan dan pemberdayaan masyarakat.</p>
+                        <hr>                        
+                        <h3>Selamat Datang, Admin Dinkes ( {{Auth::user()->nama}} )</h3>
+                    </div>
+                </div>
+           </div>
+       </div>
     </div>
 @endsection
 @section('script')

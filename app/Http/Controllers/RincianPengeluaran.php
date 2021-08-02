@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Obat;
-use App\Models\Stok_puskesmas;
 use Illuminate\Http\Request;
 
-class StokPuskesmasController extends Controller
+class RincianPengeluaran extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +13,7 @@ class StokPuskesmasController extends Controller
      */
     public function index()
     {
-        $data       = Obat::orderBy('nama_obat')->get();
-
-        return view('puskesmas.stok_obat.index',compact('data'));
+        //
     }
 
     /**
@@ -49,9 +45,7 @@ class StokPuskesmasController extends Controller
      */
     public function show($id)
     {
-        $data = Obat::findOrFail($id);
-
-        return view('puskesmas.stok_obat.show',compact('data'));
+        //
     }
 
     /**
@@ -86,12 +80,5 @@ class StokPuskesmasController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function api($id)
-    {
-        $data = Stok_puskesmas::findOrFail($id);
-
-        return json_encode($data);
     }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
-    MainController,AuthController,UserPuskesmasController,DistribusiController,PemasukanPuskesmasController
+    MainController,AuthController,UserPuskesmasController,DistribusiController,PemasukanPuskesmasController,StokPuskesmasController
 };
 
 Route::get('/', [MainController::class, 'depan'])->name('depan'); 
@@ -50,4 +50,7 @@ Route::prefix('/user-puskesmas')->name('userPuskesmas.')->middleware('auth')->gr
     Route::resource('pemasukan', '\App\Http\Controllers\PemasukanPuskesmasController');
     Route::put('/pemasukan/verif/{id}', [PemasukanPuskesmasController::class, 'verif'])->name('pemasukan.verif');  
     Route::resource('stok_puskesmas', '\App\Http\Controllers\StokPuskesmasController');
+    Route::get('/stok_puskesmas/api/{id}', [StokPuskesmasController::class, 'api'])->name('stok_puskesmas.api'); 
+    Route::resource('pengeluaran_puskesmas', '\App\Http\Controllers\PengeluaranPuskesmasController');
+    Route::resource('rincian_pengeluaran', '\App\Http\Controllers\RincianPengeluaranController');
 });

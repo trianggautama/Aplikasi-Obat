@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Obat;
+use App\Http\Requests\RincianPengeluaranRequest;
+use App\Models\Rincian_pengeluaran;
 use App\Models\Stok_puskesmas;
 use Illuminate\Http\Request;
 
-class StokPuskesmasController extends Controller
+class RincianPengeluaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,7 @@ class StokPuskesmasController extends Controller
      */
     public function index()
     {
-        $data       = Obat::orderBy('nama_obat')->get();
-
-        return view('puskesmas.stok_obat.index',compact('data'));
+        //
     }
 
     /**
@@ -36,9 +35,16 @@ class StokPuskesmasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RincianPengeluaranRequest $req)
     {
-        //
+        Rincian_pengeluaran::create($req->all());
+
+        $stok = Stok_puskesmas::findOrFail($req->stok_puskesmas_id);
+        $stok->volume = $stok->volume - $req->volume;
+        $stok->update();
+
+        return redirect()->route('userPuskesmas.pengeluaran_puskesmas.show',$req->pengeluaran_puskesmas_id)->with('success','Data Berhasil Disimpan');
+
     }
 
     /**
@@ -49,9 +55,7 @@ class StokPuskesmasController extends Controller
      */
     public function show($id)
     {
-        $data = Obat::findOrFail($id);
-
-        return view('puskesmas.stok_obat.show',compact('data'));
+        //
     }
 
     /**
@@ -85,13 +89,13 @@ class StokPuskesmasController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        $data = Rincian_pengeluaran::findOrFail($id);
+        $stok_puskesmas = Stok_puskesmas::findOrFail($data->stok_puskesmas_id);
+        $stok_puskesmas->volume = $stok_puskesmas->volume + $data->volume;
+        $stok_puskesmas->update();
+        $data->delete();
 
-    public function api($id)
-    {
-        $data = Stok_puskesmas::findOrFail($id);
+        return redirect()->route('userPuskesmas.pengeluaran_puskesmas.show',$data->pengeluaran_puskesmas_id)->with('success','Data Berhasil Disimpan');
 
-        return json_encode($data);
     }
 }

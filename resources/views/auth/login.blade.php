@@ -14,9 +14,7 @@
     <link href="{{asset('admin/css/style.css')}}" rel="stylesheet">
 
 </head>
-
 <body class="gray-bg">
-
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div style="padding-top: 150px;">
             <img src="{{asset('pemko.png')}}" alt="" width="70px" class="mb-3">

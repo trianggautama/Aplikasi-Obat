@@ -68,7 +68,7 @@
                 </div>
                 <div class="ibox ">
                     <div class="ibox-title">
-                        <h5>Stok Gudang Dinkes</h5> 
+                        <h5>Stok Gudang Puskesmas</h5> 
                     </div>
                     <div class="ibox-content">
                     <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
