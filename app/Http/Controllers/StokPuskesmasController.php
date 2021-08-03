@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Obat;
 use App\Models\Stok_puskesmas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StokPuskesmasController extends Controller
 {
@@ -49,9 +50,9 @@ class StokPuskesmasController extends Controller
      */
     public function show($id)
     {
-        $data = Obat::findOrFail($id);
-
-        return view('puskesmas.stok_obat.show',compact('data'));
+        $data    = Obat::findOrFail($id);
+        $rincian = Stok_puskesmas::where('obat_id',$data->id)->where('puskesmas_id',Auth::user()->puskesmas->id)->latest()->get();
+        return view('puskesmas.stok_obat.show',compact('data','rincian'));
     }
 
     /**

@@ -17,6 +17,7 @@
         </div>
         <div class="col-sm-8">
             <div class="title-action">
+                <a href="{{Route('userDinkes.report.detail_obat',$data->id)}}" class="btn btn-sm btn-info" target="_blank"><i class=" fa fa-print"></i> Cetak Data</a>
                 <a href="{{Route('userDinkes.obat.index')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
@@ -74,7 +75,7 @@
                         <h5>Stok Gudang Dinkes</h5> 
                     </div>
                     <div class="ibox-content">
-                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>

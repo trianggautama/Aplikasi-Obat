@@ -17,6 +17,7 @@
         </div>
         <div class="col-sm-8">
             <div class="title-action">
+                <a href="{{Route('userPuskesmas.report.pengeluaran_obat_detail',$data->id)}}" class="btn btn-info" target="_blank"><i class=" fa fa-print"></i> Cetak Data</a>
                 <a href="{{Route('userPuskesmas.pengeluaran_puskesmas.index')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Kembali</a>
             </div>
         </div>

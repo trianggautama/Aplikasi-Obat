@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
-    MainController,AuthController,UserPuskesmasController,DistribusiController,PemasukanPuskesmasController,StokPuskesmasController
+    MainController,AuthController,UserPuskesmasController,DistribusiController,PemasukanPuskesmasController,StokPuskesmasController,ReportController
 };
 
 Route::get('/', [MainController::class, 'depan'])->name('depan'); 
@@ -31,13 +31,19 @@ Route::prefix('/user-dinkes')->name('userDinkes.')->middleware('auth')->group(fu
     });
     Route::resource('satuan', '\App\Http\Controllers\SatuanObatController');
     Route::resource('kategori', '\App\Http\Controllers\KategoriObatController');
-    // Route::resource('suplier', '\App\Http\Controllers\SuplierController');
     Route::resource('obat', '\App\Http\Controllers\ObatController');
     Route::resource('stok_dinkes', '\App\Http\Controllers\StokDinkesController');
     Route::resource('distribusi', '\App\Http\Controllers\DistribusiController');
     Route::post('distribusi/obat/', [DistribusiController::class, 'tambah'])->name('distribusi.tambah');     
     Route::resource('rincian_distribusi', '\App\Http\Controllers\RincianDistribusiController');
 
+    Route::prefix('/report')->name('report.')->group(function (){
+        Route::get('/obat', [ReportController::class, 'obat'])->name('obat'); 
+        Route::get('/detail_obat/{id}', [ReportController::class, 'detail_obat'])->name('detail_obat'); 
+        Route::get('/stok_obat_dinkes', [ReportController::class, 'stok_obat_dinkes'])->name('stok_obat_dinkes'); 
+        Route::get('/distribusi', [ReportController::class, 'distribusi'])->name('distribusi'); 
+        Route::get('/distribusi_detail/{id}', [ReportController::class, 'distribusi_detail'])->name('distribusi_detail'); 
+    });
 });
 
 Route::prefix('/user-puskesmas')->name('userPuskesmas.')->middleware('auth')->group(function (){
@@ -53,4 +59,11 @@ Route::prefix('/user-puskesmas')->name('userPuskesmas.')->middleware('auth')->gr
     Route::get('/stok_puskesmas/api/{id}', [StokPuskesmasController::class, 'api'])->name('stok_puskesmas.api'); 
     Route::resource('pengeluaran_puskesmas', '\App\Http\Controllers\PengeluaranPuskesmasController');
     Route::resource('rincian_pengeluaran', '\App\Http\Controllers\RincianPengeluaranController');
+
+    Route::prefix('/report')->name('report.')->group(function (){
+        Route::get('/stok_puskesmas', [ReportController::class, 'stok_puskesmas'])->name('stok_puskesmas'); 
+        Route::get('/stok_puskesmas/{id}', [ReportController::class, 'stok_puskesmas_detail'])->name('stok_puskesmas_detail'); 
+        Route::get('/pengeluaran_obat', [ReportController::class, 'pengeluaran_obat_puskesmas'])->name('pengeluaran_obat'); 
+        Route::get('/pengeluaran_obat_detai/{id}', [ReportController::class, 'pengeluaran_obat_puskesmas_detail'])->name('pengeluaran_obat_detail'); 
+    });
 });

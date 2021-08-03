@@ -17,6 +17,7 @@
         </div>
         <div class="col-sm-8">
             <div class="title-action">
+                <a href="{{Route('userDinkes.report.obat')}}" class="btn btn-info" target="_blank"><i class=" fa fa-print"></i> Cetak Data</a>
                 <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Tambah Data</button>
             </div>
         </div>

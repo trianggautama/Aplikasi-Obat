@@ -13,12 +13,12 @@
             </ol>
         </div>
         <div class="col-sm-8">
-            <div class="title-action">
+            <div class="title-action"> 
+                <a href="{{Route('userPuskesmas.report.stok_puskesmas_detail',$data->id)}}" class="btn btn-sm btn-info" target="_blank"><i class=" fa fa-print"></i> Cetak Data</a>
                 <a href="{{Route('userPuskesmas.stok_puskesmas.index')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
-
       <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
@@ -83,7 +83,7 @@
                                 </tr>
                             </thead> 
                             <tbody>  
-                                @foreach($data->stok_puskesmas as $d)
+                                @foreach($rincian as $d)
                                 <tr>
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td>{{$d->obat->kode_obat}}</td>

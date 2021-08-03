@@ -17,6 +17,7 @@
         </div>
         <div class="col-sm-8">
             <div class="title-action">
+                <a href="{{Route('userPuskesmas.report.pengeluaran_obat')}}" class="btn btn-info" target="_blank"><i class=" fa fa-print"></i> Cetak Data</a>
                 <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Tambah Data</button>
             </div>
         </div>
@@ -38,6 +39,7 @@
                                     <th>Nama</th>
                                     <th>Diagnosa</th>
                                     <th>Tanggal Transaksis</th>
+                                    <th>Jumlah Obat</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead> 
@@ -48,6 +50,7 @@
                                     <td>{{$d->nama}}</td>
                                     <td>{{$d->diagnosa}}</td>
                                     <td>{{Carbon\carbon::parse($d->created_at)->translatedFormat('d F Y')}}</td>
+                                    <td>{{$d->rincian->sum('volume')}} obat</td>
                                     <td class="text-center">
                                         <form action="{{ route('userPuskesmas.pengeluaran_puskesmas.destroy',$d->id) }}" method="POST">
                                             @csrf
