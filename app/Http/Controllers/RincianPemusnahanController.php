@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Obat;
+use App\Models\Pemusnahan_obat;
+use App\Models\Rincian_pemusnahan;
 use App\Models\Stok_puskesmas;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class StokPuskesmasController extends Controller
+class RincianPemusnahanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,7 @@ class StokPuskesmasController extends Controller
      */
     public function index()
     {
-        $data       = Obat::orderBy('nama_obat')->get();
-
-        return view('puskesmas.stok_obat.index',compact('data'));
+        //
     }
 
     /**
@@ -32,38 +29,32 @@ class StokPuskesmasController extends Controller
         //
     }
 
-    /**
+    /** 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        Rincian_pemusnahan::create($req->all());
+
+        $stok = Stok_puskesmas::findOrFail($req->stok_puskesmas_id);
+        $stok->volume = $stok->volume - $req->volume;
+        $stok->update();
+
+        return redirect()->route('userPuskesmas.pemusnahan_obat_puskesmas.show',$req->pemusnahan_obat_id)->with('success','Data Berhasil Disimpan');
     }
 
-    /** 
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    { 
-        $data    = Obat::findOrFail($id);
-        $rincian = Stok_puskesmas::where('obat_id',$data->id)->where('puskesmas_id',Auth::user()->puskesmas->id)->latest()->get()->map(function($q){
-            if(Carbon::parse($q->tgl_exp) <= Carbon::now())
-            {
-                $q->status_exp = 0; //kadaluarsa
-            }elseif( Carbon::parse($q->tgl_exp) <= Carbon::now()->addMonths(3) && Carbon::parse($q->tgl_exp) >= Carbon::now()){
-                $q->status_exp = 1 ; // mendekati kadaluarsa 3 bulan sbelum exp
-            }else{
-                $q->status_exp = 2; // aman
-            }
-            return $q;
-        });;
-        return view('puskesmas.stok_obat.show',compact('data','rincian'));
+    {
+        //
     }
 
     /**
@@ -97,13 +88,13 @@ class StokPuskesmasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Rincian_pemusnahan::findOrFail($id);
+        $stok_puskesmas = Stok_puskesmas::findOrFail($data->stok_puskesmas_id);
+        $stok_puskesmas->volume = $stok_puskesmas->volume + $data->volume;
+        $stok_puskesmas->update();
+        $data->delete();
+
+        return redirect()->route('userPuskesmas.pemusnahan_obat_puskesmas.show',$data->pemusnahan_obat_id)->with('success','Data Berhasil Disimpan');
     }
 
-    public function api($id)
-    {
-        $data = Stok_puskesmas::findOrFail($id);
-
-        return json_encode($data);
-    }
 }

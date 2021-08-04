@@ -71,9 +71,8 @@
                     <li>
                         <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Laporan Puskesmas</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="dashboard_2.html">Permintaan Obat <small>(belum)</small></a></li>
                             <li><a href="dashboard_2.html">Pengeluaran Obat <small>(belum)</small></a></li>
-                            <li><a href="dashboard_2.html">Berita Pemusnahan Obat <small>(belum)</small></a></li>
+                            <li><a href="{{Route('userDinkes.pemusnahan_obat_dinkes.index')}}">Pemusnahan Obat</a></li>
                         </ul>
                     </li>
                     <li class="">
@@ -98,7 +97,7 @@
                 <li>
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Lain-lain</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="#">Pemusnahan Obat <small>(Belum)</small></a></li>
+                        <li><a href="{{Route('userPuskesmas.pemusnahan_obat_puskesmas.index')}}">Pemusnahan Obat</a></li>
                     </ul>
                 </li>
                 @endif

@@ -27,7 +27,7 @@
             </div>
             @else
             @foreach($notif as $n)
-            <div class="card">
+            <div class="card mb-1">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-1">
@@ -42,9 +42,9 @@
                             <a href="{{route('userPuskesmas.notif.detail',['notif_id'=>$n->id,'id'=>$n->data['id']])}}" class="btn btn-primary text-white">
                                 <i class="fa fa-info-circle"></i>
                             </a>                    
-                            <a href="{{Route('userPuskesmas.notif.delete',['id'=>$n->id])}}" type="button" class="btn btn-secondary text-white">
+                            <!-- <a href="{{Route('userPuskesmas.notif.delete',['id'=>$n->id])}}" type="button" class="btn btn-secondary text-white">
                                 <i class="fa fa-trash"></i> 
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostStokDinkesRequest;
 use App\Models\Obat;
 use App\Models\Stok_dinkes;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class StokDinkesController extends Controller
@@ -16,7 +17,18 @@ class StokDinkesController extends Controller
      */
     public function index()
     {
-        $data = Stok_dinkes::orderBy('tgl_exp')->get();
+        $data = Stok_dinkes::get()->map(function($q){
+            if(Carbon::parse($q->tgl_exp) <= Carbon::now())
+            {
+                $q->status_exp = 0; //kadaluarsa
+            }elseif( Carbon::parse($q->tgl_exp) <= Carbon::now()->addMonths(3) && Carbon::parse($q->tgl_exp) >= Carbon::now()){
+                $q->status_exp = 1 ; // mendekati kadaluarsa 3 bulan sbelum exp
+            }else{
+                $q->status_exp = 2; // aman
+            }
+            return $q;
+        });
+
         $obat = Obat::orderBy('nama_obat')->get();
 
         return view('dinkes.stok_obat.index',compact('data','obat'));

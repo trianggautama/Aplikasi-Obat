@@ -9,6 +9,7 @@ use App\Models\Puskesmas;
 use App\Models\Stok_dinkes;
 use App\Models\User;
 use App\Notifications\DistribusiNotification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
@@ -76,7 +77,17 @@ class DistribusiController extends Controller
     {
         $data       = Distribusi_obat::findOrFail($id);
         $stok       = Stok_dinkes::orderBy('obat_id')->get();
-        $rincian    = $data->rincian;
+        $rincian    = $data->rincian->map(function($q){
+            if(Carbon::parse($q->tgl_exp) <= Carbon::now())
+            {
+                $q->status_exp = 0; //kadaluarsa
+            }elseif( Carbon::parse($q->tgl_exp) <= Carbon::now()->addMonths(3) && Carbon::parse($q->tgl_exp) >= Carbon::now()){
+                $q->status_exp = 1 ; // mendekati kadaluarsa 3 bulan sbelum exp
+            }else{
+                $q->status_exp = 2; // aman
+            }
+            return $q;
+        });
         return view('dinkes.distribusi.show',compact('data','stok','rincian'));
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Distribusi_obat;
 use App\Models\Obat;
+use App\Models\Pemusnahan_obat;
 use App\Models\Pengeluaran_puskesmas;
 use App\Models\Stok_dinkes;
 use App\Models\Stok_puskesmas;
@@ -104,6 +105,34 @@ class ReportController extends Controller
         $pdf->setPaper('a4', 'potrait'); 
         
         return $pdf->stream('Laporan Pengeluaran Puskesmas Detail.pdf');
+    } 
+
+    public function pemusnahan_obat_dinkes()
+    {
+        $data       = Pemusnahan_obat::latest()->get();
+        $pdf  = PDF::loadView('report.pemusnahan_obat_dinkes', ['data'=>$data]);
+        $pdf->setPaper('a4', 'potrait'); 
+        
+        return $pdf->stream('Pemusnahan Obat dinkes.pdf');
+    } 
+
+    public function pemusnahan_obat_puskesmas()
+    {
+        $data       = Pemusnahan_obat::where('puskesmas_id',Auth::user()->puskesmas->id)->latest()->get();
+        $pdf  = PDF::loadView('report.pemusnahan_obat_puskesmas', ['data'=>$data]);
+        $pdf->setPaper('a4', 'potrait'); 
+        
+        return $pdf->stream('Pemusnahan Obat Puskesmas.pdf');
+    } 
+
+    public function pemusnahan_obat_detail($id)
+    {
+        $data       = Pemusnahan_obat::findOrFail($id);
+        $rincian    = $data->rincian;
+        $pdf  = PDF::loadView('report.berita_pemusnahan_obat', ['data'=>$data, 'rincian'=>$rincian]);
+        $pdf->setPaper('a4', 'potrait'); 
+        
+        return $pdf->stream('Berita Acara Pemusnahan Obat.pdf');
     } 
 
 }

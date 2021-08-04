@@ -89,7 +89,7 @@
                                     <td>{{$d->obat->kode_obat}}</td>
                                     <td>{{$d->obat->nama_obat}}</td>
                                     <td>{{Carbon\carbon::parse($d->tgl_masuk)->translatedformat('d F Y')}}</td>
-                                    <td>{{Carbon\carbon::parse($d->tgl_exp)->translatedformat('d F Y')}}</td>
+                                    <td><span class="badge @if($d->status_exp == 0) badge-danger @elseif($d->status_exp == 1) badge-warning @else badge-success @endif" >{{Carbon\carbon::parse($d->tgl_exp)->translatedformat('d F Y')}}</span></td>
                                     <td class="text-center">{{$d->volume}} {{$d->obat->satuan->satuan}}</td>
                                 </tr>
                                 @endforeach
@@ -99,6 +99,13 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <br>
+                        <h5>Keterangan :</h5>
+                        <ul>
+                            <li><div class="badge badge-success">Aman</div></li>
+                            <li><div class="badge badge-warning">Mendekati Kadaluarsa (3 Bulan)</div></li>
+                            <li><div class="badge badge-danger">kadaluarsa</div></li>
+                        </ul>
                     </div>
                 </div>
             </div>
