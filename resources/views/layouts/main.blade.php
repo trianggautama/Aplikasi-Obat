@@ -75,9 +75,9 @@
                             <li><a href="{{Route('userDinkes.pemusnahan_obat_dinkes.index')}}">Pemusnahan Obat</a></li>
                         </ul>
                     </li>
-                    <li class="">
+                    <!-- <li class="">
                         <a href="package.html"><i class="fa fa-print"></i> <span class="nav-label">Laporan <small>(belum)</small></span></a>
-                    </li>
+                    </li> -->
                 @endif
                 @if(Auth::user()->role ==  'Puskesmas')
                 <li>
