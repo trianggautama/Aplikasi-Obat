@@ -103,14 +103,14 @@
                         <td>{{$data->puskesmas->user->nama}}</td>
                     </tr>
                     <tr>
-                        <td width="25%">Nama Pasien</td>
+                        <td width="25%">Alamat</td>
                         <td width="3%">:</td>
-                        <td>{{$data->nama}}</td>
+                        <td>{{$data->puskesmas->alamat}}</td>
                     </tr>
                     <tr>
-                        <td width="25%">Diagnosa</td> 
+                        <td width="25%">No hp</td> 
                         <td width="3%">:</td>
-                        <td>{{$data->diagnosa}}</td>
+                        <td>{{$data->puskesmas->no_hp}}</td>
                     </tr>
                     <tr>
                         <td width="25%">Tanggal Transaksi</td>
