@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
                 </div>
-                <a href="/" class="btn btn-secondary block full-width m-b">halaman depan</a>
+                <!-- <a href="/" class="btn btn-secondary block full-width m-b">halaman depan</a> -->
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
             </form>
         </div>

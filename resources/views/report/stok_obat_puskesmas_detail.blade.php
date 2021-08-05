@@ -170,8 +170,8 @@
                 <h5 style="margin:0px">Kepala Dinas </h5>
                 <br>
                 <br>
-                <h5 style="text-decoration:underline; margin:0px">(...........................)</h5>
-                <!-- <h5 style="margin:0px">NIP. 19620606 199203 2 007</h5> -->
+                <h5 style="text-decoration:underline; margin:0px">H. RIZANA MIRZA SH,. M.Kes</h5>
+                <h5 style="margin:0px">NIP. 19660828 199303 1 007</h5>
                 </div>
             </div>
         </div>

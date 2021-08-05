@@ -89,7 +89,7 @@
     <div class="container">
     <hr style="margin-top:1px;">
         <div class="isi">
-            <h2 style="text-align:center;">DATA PEMUSNAHAN sOBAT</h2>
+            <h2 style="text-align:center;">DATA PEMUSNAHAN OBAT</h2>
             <br>
                 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                     <thead>

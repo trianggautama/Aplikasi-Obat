@@ -30,6 +30,7 @@
                     </div>
                     <hr>                        
                     <h3>Selamat Datang, Admin Dinkes ( {{Auth::user()->nama}} )</h3>
+                    <!-- <p></p>
                     <div class="row mb-4">
                         <div class="col-md">
                             <div class="widget style1 navy-bg">
@@ -82,7 +83,7 @@
                                 </div>
                             </div>
                        </div>
-                    </div>
+                    </div> -->
                     <br>
                     <br>
                     <br>

@@ -74,7 +74,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h2>Selamat Datang ( {{Auth::user()->nama}} )</h2>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores nostrum, minima numquam magni cum veniam necessitatibus optio rerum iure odio sequi doloribus ex architecto, error nesciunt laudantium possimus nulla est.</p>
+                        <p>Di aplikasi Pendistribusian Obat Dinas Kesehatan Kota Banjarbaru</p>
                     </div>
                 </div>
             </div>
