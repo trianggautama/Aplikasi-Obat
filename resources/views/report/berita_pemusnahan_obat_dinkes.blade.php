@@ -124,10 +124,10 @@
                         @foreach($rincian as $d)
                         <tr>
                             <td class="text-center border">{{$loop->iteration}}</td>
-                            <td class="border">{{$d->stok_puskesmas->obat->nama_obat}}</td>
-                            <td class="border">{{$d->stok_puskesmas->kode_stok}}</td>
-                            <td class="border">{{Carbon\carbon::parse($d->stok_puskesmas->tgl_exp)->translatedFormat('d F Y')}}</td>
-                            <td class="text-center border">{{$d->volume}} {{$d->stok_puskesmas->obat->satuan->satuan}}</td>
+                            <td class="border">{{$d->stok_dinkes->obat->nama_obat}}</td>
+                            <td class="border">{{$d->stok_dinkes->kode_stok}}</td>
+                            <td class="border">{{Carbon\carbon::parse($d->stok_dinkes->tgl_exp)->translatedFormat('d F Y')}}</td>
+                            <td class="text-center border">{{$d->volume}} {{$d->stok_dinkes->obat->satuan->satuan}}</td>
                         </tr>
                         @endforeach
                     </tbody>

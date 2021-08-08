@@ -45,7 +45,7 @@ class RincianPemusnahanController extends Controller
             $stok->volume = $stok->volume - $req->volume;
             $stok->update();
         }else{
-            $stok = Stok_dinkes::findOrFail($req->stok_puskesmas_id);
+            $stok = Stok_dinkes::findOrFail($req->stok_dinkes_id);
             $stok->volume = $stok->volume - $req->volume;
             $stok->update();
         }
@@ -101,7 +101,7 @@ class RincianPemusnahanController extends Controller
             $stok_puskesmas->volume = $stok_puskesmas->volume + $data->volume;
             $stok_puskesmas->update();
         }else{
-            $stok_puskesmas = Stok_dinkes::findOrFail($data->stok_puskesmas_id);
+            $stok_puskesmas = Stok_dinkes::findOrFail($data->stok_dinkes_id);
             $stok_puskesmas->volume = $stok_puskesmas->volume + $data->volume;
             $stok_puskesmas->update();
         }

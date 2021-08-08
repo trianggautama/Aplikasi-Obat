@@ -15,5 +15,4 @@ class Stok_puskesmas extends Model
     {
         return $this->belongsto('App\Models\Obat');
     }
-
 }

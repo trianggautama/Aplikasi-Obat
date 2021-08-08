@@ -15,6 +15,10 @@ class Rincian_pemusnahan extends Model
     {
         return $this->belongsto('App\Models\Stok_puskesmas');
     }
+    public function stok_dinkes() 
+    {
+        return $this->belongsto('App\Models\Stok_dinkes');
+    }
 
     public function pemusnahan() 
     {

@@ -14,6 +14,6 @@ class Stok_dinkes extends Model
     public function obat() 
     {
         return $this->belongsto('App\Models\Obat','obat_id');
-    }
+    } 
 
 }

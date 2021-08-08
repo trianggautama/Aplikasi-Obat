@@ -63,7 +63,7 @@
                                 <input type="hidden" name="pemusnahan_obat_id" id="pemusnahan_obat_id" value="{{$data->id}}">
                                 <div class="form-group">
                                     <label for="">Stok obat</label>
-                                    <select name="stok_puskesmas_id" id="stok_obat_id" class="form-control">
+                                    <select name="stok_dinkes_id" id="stok_obat_id" class="form-control">
                                         <option value="">-- pilih stok --</option>
                                         @foreach($stok as $s)
                                             <option value="{{$s->id}}">{{$s->kode_stok}}.{{$s->obat->nama_obat}} (exp. {{Carbon\carbon::parse($s->tgl_exp)->translatedFormat('d F Y')}})</option>
@@ -91,13 +91,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($rincian as $r)
+                                            @foreach($rincian as $r) 
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-                                                    <td>{{$r->stok_puskesmas->obat->nama_obat}}</td>
-                                                    <td>{{$r->stok_puskesmas->kode_stok}}</td>
-                                                    <td>{{Carbon\carbon::parse($r->stok_puskesmas->tgl_exp)->translatedFormat('d F Y')}}</td>
-                                                    <td>{{$r->volume}} {{$r->stok_puskesmas->obat->satuan->satuan}}</td>
+                                                    <td>{{$r->stok_dinkes->obat->nama_obat}}</td>
+                                                    <td>{{$r->stok_dinkes->kode_stok}}</td>
+                                                    <td>{{Carbon\carbon::parse($r->stok_dinkes->tgl_exp)->translatedFormat('d F Y')}}</td>
+                                                    <td>{{$r->volume}} {{$r->stok_dinkes->obat->satuan->satuan}}</td>
                                                     <td class="text-center">
                                                             <form action="{{ route('userPuskesmas.rincian_pemusnahan.destroy',$r->id) }}" method="POST">
                                                                 @csrf
