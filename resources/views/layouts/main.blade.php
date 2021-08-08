@@ -66,13 +66,14 @@
                         <ul class="nav nav-second-level collapse">
                             <li><a href="{{Route('userDinkes.stok_dinkes.index')}}">Stok Obat</a></li>
                             <li><a href="{{Route('userDinkes.distribusi.index')}}">Pendistribusian Obat</a></li>
+                            <li><a href="{{Route('userDinkes.pemusnahan_obat_dinkes.index')}}">Pemusnahan Obat Dinkes</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Laporan Puskesmas</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <!-- <li><a href="dashboard_2.html">Pengeluaran Obat <small>(belum)</small></a></li> -->
-                            <li><a href="{{Route('userDinkes.pemusnahan_obat_dinkes.index')}}">Pemusnahan Obat</a></li>
+                            <li><a href="{{Route('userDinkes.pemusnahan_obat_dinkes.puskesmas_index')}}">Pemusnahan Obat</a></li> 
                         </ul>
                     </li>
                     <!-- <li class="">

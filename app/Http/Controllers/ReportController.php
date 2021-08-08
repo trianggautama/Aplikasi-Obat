@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 
+use function Ramsey\Uuid\v1;
+
 class ReportController extends Controller
 {
     public function obat()
@@ -116,6 +118,15 @@ class ReportController extends Controller
         return $pdf->stream('Pemusnahan Obat dinkes.pdf');
     } 
 
+    public function pemusnahan_obat_dinkes2()
+    {
+        $data       = Pemusnahan_obat::where('puskesmas_id', null)->latest()->get();
+        $pdf  = PDF::loadView('report.pemusnahan_obat_dinkes2', ['data'=>$data]);
+        $pdf->setPaper('a4', 'potrait'); 
+        
+        return $pdf->stream('Pemusnahan Obat dinkes.pdf');
+    } 
+
     public function pemusnahan_obat_puskesmas()
     {
         $data       = Pemusnahan_obat::where('puskesmas_id',Auth::user()->puskesmas->id)->latest()->get();
@@ -128,9 +139,16 @@ class ReportController extends Controller
     public function pemusnahan_obat_detail($id)
     {
         $data       = Pemusnahan_obat::findOrFail($id);
-        $rincian    = $data->rincian;
-        $pdf  = PDF::loadView('report.berita_pemusnahan_obat', ['data'=>$data, 'rincian'=>$rincian]);
-        $pdf->setPaper('a4', 'potrait'); 
+        if($data->puskesmas_id == null){
+            $rincian    = $data->rincian;
+            $pdf  = PDF::loadView('report.berita_pemusnahan_obat_dinkes', ['data'=>$data, 'rincian'=>$rincian]);
+            $pdf->setPaper('a4', 'potrait'); 
+        }else{
+            $rincian    = $data->rincian;
+            $pdf  = PDF::loadView('report.berita_pemusnahan_obat', ['data'=>$data, 'rincian'=>$rincian]);
+            $pdf->setPaper('a4', 'potrait'); 
+        }
+       
         
         return $pdf->stream('Berita Acara Pemusnahan Obat.pdf');
     } 

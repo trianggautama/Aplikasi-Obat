@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Pemusnahan_obat;
 use App\Models\Rincian_pemusnahan;
+use App\Models\Stok_dinkes;
 use App\Models\Stok_puskesmas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RincianPemusnahanController extends Controller
 {
@@ -38,12 +40,17 @@ class RincianPemusnahanController extends Controller
     public function store(Request $req)
     {
         Rincian_pemusnahan::create($req->all());
+        if(Auth::user()->role == 'Puskesmas'){
+            $stok = Stok_puskesmas::findOrFail($req->stok_puskesmas_id);
+            $stok->volume = $stok->volume - $req->volume;
+            $stok->update();
+        }else{
+            $stok = Stok_dinkes::findOrFail($req->stok_puskesmas_id);
+            $stok->volume = $stok->volume - $req->volume;
+            $stok->update();
+        }
 
-        $stok = Stok_puskesmas::findOrFail($req->stok_puskesmas_id);
-        $stok->volume = $stok->volume - $req->volume;
-        $stok->update();
-
-        return redirect()->route('userPuskesmas.pemusnahan_obat_puskesmas.show',$req->pemusnahan_obat_id)->with('success','Data Berhasil Disimpan');
+        return redirect()->back()->with('success','Data Berhasil Disimpan');
     }
 
     /**
@@ -89,12 +96,18 @@ class RincianPemusnahanController extends Controller
     public function destroy($id)
     {
         $data = Rincian_pemusnahan::findOrFail($id);
-        $stok_puskesmas = Stok_puskesmas::findOrFail($data->stok_puskesmas_id);
-        $stok_puskesmas->volume = $stok_puskesmas->volume + $data->volume;
-        $stok_puskesmas->update();
+        if(Auth::user()->role == 'Puskesmas'){
+            $stok_puskesmas = Stok_puskesmas::findOrFail($data->stok_puskesmas_id);
+            $stok_puskesmas->volume = $stok_puskesmas->volume + $data->volume;
+            $stok_puskesmas->update();
+        }else{
+            $stok_puskesmas = Stok_dinkes::findOrFail($data->stok_puskesmas_id);
+            $stok_puskesmas->volume = $stok_puskesmas->volume + $data->volume;
+            $stok_puskesmas->update();
+        }
         $data->delete();
 
-        return redirect()->route('userPuskesmas.pemusnahan_obat_puskesmas.show',$data->pemusnahan_obat_id)->with('success','Data Berhasil Disimpan');
+        return redirect()->back()->with('success','Data Berhasil Disimpan');
     }
 
 }

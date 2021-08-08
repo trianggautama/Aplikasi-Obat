@@ -34,7 +34,7 @@ class StokDinkesController extends Controller
         return view('dinkes.stok_obat.index',compact('data','obat'));
     }
 
-    /**
+    /**x    
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

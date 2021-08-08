@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PemusnahanObatRequest;
 use App\Models\Pemusnahan_obat;
+use App\Models\Stok_dinkes;
 use App\Models\Stok_puskesmas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,9 +23,15 @@ class PemusnahanObatController extends Controller
         return view('puskesmas.pemusnahan_obat.index',compact('data'));
     }
 
+    public function pemusnahan_dinkes()
+    { 
+        $data = Pemusnahan_obat::where('puskesmas_id',null)->latest()->get();
+        return view('dinkes.pemusnahan_obat.dinkes_index',compact('data'));
+    }
+
     public function dinkes_index()
     { 
-        $data = Pemusnahan_obat::latest()->get();
+        $data = Pemusnahan_obat::where('puskesmas_id','!=', 0)->latest()->get();
         return view('dinkes.pemusnahan_obat.index',compact('data'));
     }
 
@@ -47,10 +54,17 @@ class PemusnahanObatController extends Controller
     public function store(PemusnahanObatRequest $req)
     {
         $data = $req->all();
-        $data['puskesmas_id'] = Auth::user()->puskesmas->id;
-        Pemusnahan_obat::create($data);
+        if(Auth::user()->role == 'Puskesmas'){
+            $data['puskesmas_id'] = Auth::user()->puskesmas->id;
+            Pemusnahan_obat::create($data);
+            return redirect()->route('userPuskesmas.pemusnahan_obat_puskesmas.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            $data['puskesmas_id'] = NULL;
+            $data['status']       = 1;
+            Pemusnahan_obat::create($data); 
+            return redirect()->route('userDinkes.pemusnahan_obat_dinkes.index')->with('success','Data Berhasil Disimpan'); 
+        }
 
-        return redirect()->route('userPuskesmas.pemusnahan_obat_puskesmas.index')->with('success','Data Berhasil Disimpan');
     }
 
     /**
@@ -74,6 +88,15 @@ class PemusnahanObatController extends Controller
         return view('dinkes.pemusnahan_obat.show',compact('data','rincian'));
     }
 
+
+    public function pemusnahan_dinkes_show($id)
+    {
+        $stok       = Stok_dinkes::whereDate('tgl_exp','<=', Carbon::now())->get();
+        $data       = Pemusnahan_obat::findOrFail($id);
+        $rincian    = $data->rincian;
+        return view('dinkes.pemusnahan_obat.dinkes_show',compact('data','rincian','stok'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -84,6 +107,12 @@ class PemusnahanObatController extends Controller
     {
         $data = Pemusnahan_obat::findOrFail($id);
         return view('puskesmas.pemusnahan_obat.edit',compact('data'));
+    }
+
+    public function dinkes_edit($id)
+    {
+        $data = Pemusnahan_obat::findOrFail($id);
+        return view('dinkes.pemusnahan_obat.edit',compact('data'));
     }
 
     /**
@@ -101,6 +130,14 @@ class PemusnahanObatController extends Controller
         return redirect()->route('userPuskesmas.pemusnahan_obat_puskesmas.index')->with('success','Data Berhasil Diupdate');
     }
 
+    public function dinkes_update(PemusnahanObatRequest $req, $id)
+    {
+        $data = Pemusnahan_obat::findOrFail($id);
+        $data->update($req->all());
+
+        return redirect()->route('userDinkes.pemusnahan_obat_dinkes.index')->with('success','Data Berhasil Diupdate');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -112,7 +149,7 @@ class PemusnahanObatController extends Controller
         $data = Pemusnahan_obat::findOrFail($id);
         $data->delete();
 
-        return redirect()->route('userPuskesmas.pemusnahan_obat_puskesmas.index')->with('success','Data Berhasil Dihapus');
+        return redirect()->back()->with('success','Data Berhasil Dihapus');
     }
 
     public function verifikasi($id)

@@ -31,14 +31,18 @@ Route::prefix('/user-dinkes')->name('userDinkes.')->middleware('auth')->group(fu
     });
     Route::resource('satuan', '\App\Http\Controllers\SatuanObatController');
     Route::resource('kategori', '\App\Http\Controllers\KategoriObatController');
-    Route::resource('obat', '\App\Http\Controllers\ObatController');
+    Route::resource('obat', '\App\Http\Controllers\ObatController'); 
     Route::resource('stok_dinkes', '\App\Http\Controllers\StokDinkesController');
     Route::resource('distribusi', '\App\Http\Controllers\DistribusiController');
     Route::post('distribusi/obat/', [DistribusiController::class, 'tambah'])->name('distribusi.tambah');     
     Route::resource('rincian_distribusi', '\App\Http\Controllers\RincianDistribusiController');
-
+ 
     Route::prefix('/pemusnahan_obat_dinkes')->name('pemusnahan_obat_dinkes.')->group(function (){
-        Route::get('/', [PemusnahanObatController::class, 'dinkes_index'])->name('index'); 
+        Route::get('/dinkes', [PemusnahanObatController::class, 'pemusnahan_dinkes'])->name('index'); 
+        Route::get('/puskesmas', [PemusnahanObatController::class, 'dinkes_index'])->name('puskesmas_index'); 
+        Route::get('/dinkes-show/{id}', [PemusnahanObatController::class, 'pemusnahan_dinkes_show'])->name('dinkes_show'); 
+        Route::get('/edit/{id}', [PemusnahanObatController::class, 'dinkes_edit'])->name('edit'); 
+        Route::put('/edit/{id}', [PemusnahanObatController::class, 'dinkes_update'])->name('update');
         Route::get('/show/{id}', [PemusnahanObatController::class, 'dinkes_show'])->name('show'); 
         Route::get('/verifikasi/{id}', [PemusnahanObatController::class, 'verifikasi'])->name('verifikasi'); 
     });
@@ -50,6 +54,7 @@ Route::prefix('/user-dinkes')->name('userDinkes.')->middleware('auth')->group(fu
         Route::get('/distribusi', [ReportController::class, 'distribusi'])->name('distribusi'); 
         Route::get('/distribusi_detail/{id}', [ReportController::class, 'distribusi_detail'])->name('distribusi_detail'); 
         Route::get('/pemusnahan_obat_dinkes', [ReportController::class, 'pemusnahan_obat_dinkes'])->name('pemusnahan_obat_dinkes'); 
+        Route::get('/pemusnahan_obat_dinkes2', [ReportController::class, 'pemusnahan_obat_dinkes2'])->name('pemusnahan_obat_dinkes2'); 
     });
 });
 
