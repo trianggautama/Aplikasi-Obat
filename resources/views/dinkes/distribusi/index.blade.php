@@ -105,8 +105,7 @@
                         <input type="date" class="form-control" name="tgl_distribusi" value="{{Carbon\carbon::now()->format('Y-m-d')}}">
                     </div>
                     <div class="form-group">
-                        <label for=""> Status Pendistribusian</label>
-                        <select name="status_distribusi" class="form-control">
+                        <select name="status_distribusi" class="d-none">
                             <option value="1">Rutin</option>
                             <option value="2">Permintaan</option>
                         </select>
