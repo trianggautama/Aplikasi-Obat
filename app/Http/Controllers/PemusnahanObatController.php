@@ -25,12 +25,14 @@ class PemusnahanObatController extends Controller
 
     public function pemusnahan_dinkes()
     { 
+        
         $data = Pemusnahan_obat::where('puskesmas_id',null)->latest()->get();
         return view('dinkes.pemusnahan_obat.dinkes_index',compact('data'));
     }
 
     public function dinkes_index()
     { 
+        // dd('tes');
         $data = Pemusnahan_obat::where('puskesmas_id','!=', 0)->latest()->get();
         return view('dinkes.pemusnahan_obat.index',compact('data'));
     }
@@ -83,9 +85,10 @@ class PemusnahanObatController extends Controller
 
     public function dinkes_show($id)
     {
+
         $data       = Pemusnahan_obat::findOrFail($id);
         $rincian    = $data->rincian;
-        return view('dinkes.pemusnahan_obat.show',compact('data','rincian'));
+        return view('dinkes.pemusnahan_obat.dinkes_show',compact('data','rincian'));
     }
 
 

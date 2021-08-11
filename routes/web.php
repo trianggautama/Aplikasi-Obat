@@ -30,7 +30,7 @@ Route::prefix('/user-dinkes')->name('userDinkes.')->middleware('auth')->group(fu
         Route::get('/{id}', [UserPuskesmasController::class, 'dinkes_show'])->name('show');     
     });
     Route::resource('satuan', '\App\Http\Controllers\SatuanObatController');
-    Route::resource('kategori', '\App\Http\Controllers\KategoriObatController');
+    Route::resource('kategori', '\App\Http\Controllers\KategoriObatController'); 
     Route::resource('obat', '\App\Http\Controllers\ObatController'); 
     Route::resource('stok_dinkes', '\App\Http\Controllers\StokDinkesController');
     Route::resource('distribusi', '\App\Http\Controllers\DistribusiController');
@@ -38,7 +38,7 @@ Route::prefix('/user-dinkes')->name('userDinkes.')->middleware('auth')->group(fu
     Route::resource('rincian_distribusi', '\App\Http\Controllers\RincianDistribusiController');
  
     Route::prefix('/pemusnahan_obat_dinkes')->name('pemusnahan_obat_dinkes.')->group(function (){
-        Route::get('/dinkes', [PemusnahanObatController::class, 'pemusnahan_dinkes'])->name('index'); 
+        Route::get('/dinkes', [PemusnahanObatController::class, 'pemusnahan_dinkes'])->name('index');  
         Route::get('/puskesmas', [PemusnahanObatController::class, 'dinkes_index'])->name('puskesmas_index'); 
         Route::get('/dinkes-show/{id}', [PemusnahanObatController::class, 'pemusnahan_dinkes_show'])->name('dinkes_show'); 
         Route::get('/edit/{id}', [PemusnahanObatController::class, 'dinkes_edit'])->name('edit'); 
