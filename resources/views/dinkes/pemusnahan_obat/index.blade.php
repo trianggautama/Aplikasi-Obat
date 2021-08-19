@@ -37,7 +37,7 @@
                                     <th>No</th>
                                     <th>Puskesmas</th>
                                     <th>Tanggal Pemusnahan</th>
-                                    <th>Volume</th>
+                                    <th>Volume</th> 
                                     <th>Status</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>

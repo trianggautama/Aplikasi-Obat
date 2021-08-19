@@ -21,7 +21,7 @@
                 <a class="btn btn-success text-white" href="{{Route('userDinkes.pemusnahan_obat_dinkes.verifikasi',$data->id)}}"><i class="fa fa-check"></i> Verifikasi Data</a>
             @endif
             <a href="{{Route('userPuskesmas.report.pemusnahan_obat_detail',$data->id)}}" class="btn btn-info" target="_blank"><i class=" fa fa-print"></i> Cetak Data</a>
-                <a href="{{Route('userDinkes.pemusnahan_obat_dinkes.puskesmas_index')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Kembali</a>
+                <a href="{{Route('userDinkes.pemusnahan_obat_dinkes.index')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Kembali</a>
             </div> 
         </div>
     </div>
