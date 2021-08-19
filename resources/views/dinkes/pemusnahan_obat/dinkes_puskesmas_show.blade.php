@@ -37,7 +37,7 @@
                                 <tr>
                                     <td width="17%">Puskesmas</td>
                                     <td width="3%">:</td>
-                                    <td>Dinas Kesehatan</td>
+                                    <td>{{$data->puskesmas->user->nama}}</td>
                                 </tr>
                                 <tr>
                                     <td width="17%">Tanggal Pemusnahan</td>
@@ -82,10 +82,10 @@
                                             @foreach($rincian as $r)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-                                                    <td>{{$r->stok_dinkes->obat->nama_obat}}</td>
-                                                    <td>{{$r->stok_dinkes->kode_stok}}</td>
-                                                    <td>{{Carbon\carbon::parse($r->stok_dinkes->tgl_exp)->translatedFormat('d F Y')}}</td>
-                                                    <td>{{$r->volume}} {{$r->stok_dinkes->obat->satuan->satuan}}</td>
+                                                    <td>{{$r->stok_puskesmas->obat->nama_obat}}</td>
+                                                    <td>{{$r->stok_puskesmas->kode_stok}}</td>
+                                                    <td>{{Carbon\carbon::parse($r->stok_puskesmas->tgl_exp)->translatedFormat('d F Y')}}</td>
+                                                    <td>{{$r->volume}} {{$r->stok_puskesmas->obat->satuan->satuan}}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

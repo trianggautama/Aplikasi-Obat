@@ -88,7 +88,7 @@ class PemusnahanObatController extends Controller
 
         $data       = Pemusnahan_obat::findOrFail($id);
         $rincian    = $data->rincian;
-        return view('dinkes.pemusnahan_obat.dinkes_show',compact('data','rincian'));
+        return view('dinkes.pemusnahan_obat.dinkes_puskesmas_show',compact('data','rincian'));
     }
 
 
