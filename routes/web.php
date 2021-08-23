@@ -55,6 +55,13 @@ Route::prefix('/user-dinkes')->name('userDinkes.')->middleware('auth')->group(fu
         Route::get('/distribusi_detail/{id}', [ReportController::class, 'distribusi_detail'])->name('distribusi_detail'); 
         Route::get('/pemusnahan_obat_dinkes', [ReportController::class, 'pemusnahan_obat_dinkes'])->name('pemusnahan_obat_dinkes'); 
         Route::get('/pemusnahan_obat_dinkes2', [ReportController::class, 'pemusnahan_obat_dinkes2'])->name('pemusnahan_obat_dinkes2'); 
+        Route::get('/distribusi/filter', [ReportController::class, 'distribusi_filter'])->name('distribusi.filter');  
+        Route::get('/distribusi/filter/cetak', [ReportController::class, 'distribusi_filter_cetak'])->name('distribusi.filter.cetak'); 
+        Route::get('/stok_obat_dinkes/filter', [ReportController::class, 'stok_obat_dinkes_filter'])->name('stok_obat_dinkes.filter'); 
+        Route::get('/stok_obat_dinkes/filter/cetak', [ReportController::class, 'stok_obat_dinkes_filter_cetak'])->name('stok_obat_dinkes.filter.cetak'); 
+        Route::get('/pemusnahan_obat_dinkes2/filter', [ReportController::class, 'pemusnahan_obat_dinkes2_filter'])->name('pemusnahan_obat_dinkes2.filter'); 
+        Route::get('/pemusnahan_obat_dinkes2/filter/cetak', [ReportController::class, 'pemusnahan_obat_dinkes2_filter_cetak'])->name('pemusnahan_obat_dinkes2.filter.cetak'); 
+
     });
 });
 
@@ -81,5 +88,10 @@ Route::prefix('/user-puskesmas')->name('userPuskesmas.')->middleware('auth')->gr
         Route::get('/pengeluaran_obat_detai/{id}', [ReportController::class, 'pengeluaran_obat_puskesmas_detail'])->name('pengeluaran_obat_detail'); 
         Route::get('/pemusnahan_obat_puskesmas', [ReportController::class, 'pemusnahan_obat_puskesmas'])->name('pemusnahan_obat_puskesmas'); 
         Route::get('/pemusnahan_obat_detail/{id}', [ReportController::class, 'pemusnahan_obat_detail'])->name('pemusnahan_obat_detail'); 
+        Route::get('/pengeluaran_obat/filter', [ReportController::class, 'pengeluaran_obat_puskesmas_filter'])->name('pengeluaran_obat.filter'); 
+        Route::get('/pengeluaran_obat/filter/cetak', [ReportController::class, 'pengeluaran_obat_puskesmas_filter_cetak'])->name('pengeluaran_obat.filter.cetak'); 
+        Route::get('/pemusnahan_obat_puskesmas/filter', [ReportController::class, 'pemusnahan_obat_puskesmas_filter'])->name('pemusnahan_obat_puskesmas.filter'); 
+        Route::get('/pemusnahan_obat_puskesmas/filter/cetak', [ReportController::class, 'pemusnahan_obat_puskesmas_filter_cetak'])->name('pemusnahan_obat_puskesmas.filter.cetak'); 
+
     });
 });

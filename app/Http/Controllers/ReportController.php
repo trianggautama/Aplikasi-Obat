@@ -153,5 +153,92 @@ class ReportController extends Controller
         return $pdf->stream('Berita Acara Pemusnahan Obat.pdf');
     } 
 
+    public function distribusi_filter()
+    {
+        return view('dinkes.distribusi.filter');
+    }
+
+    public function distribusi_filter_cetak( Request $req)
+    {
+        $data         = Distribusi_obat::whereBetween('tgl_distribusi', [$req->tgl_awal, $req->tgl_akhir])->get();
+        $tgl_awal     = $req->tgl_awal;
+        $tgl_akhir    = $req->tgl_akhir ;
+
+        $pdf          = PDF::loadView('report.distribusi_filter', ['data'=>$data,'tgl_awal'=>$tgl_awal,'tgl_akhir'=>$tgl_akhir,]);
+        $pdf->setPaper('a4', 'landscape');
+
+        return $pdf->stream('Laporan Pemasukan Filter.pdf');
+        return view('dinkes.distribusi.filter');
+    }
+
+    public function stok_obat_dinkes_filter()
+    {
+
+        return view('dinkes.stok_obat.filter');
+    }
+
+    public function stok_obat_dinkes_filter_cetak( Request $req)
+    {
+        $data         = Stok_dinkes::whereBetween('tgl_masuk', [$req->tgl_awal, $req->tgl_akhir])->get();
+        $tgl_awal     = $req->tgl_awal;
+        $tgl_akhir    = $req->tgl_akhir ;
+
+        $pdf          = PDF::loadView('report.stok_obat_dinkes_filter', ['data'=>$data,'tgl_awal'=>$tgl_awal,'tgl_akhir'=>$tgl_akhir,]);
+        $pdf->setPaper('a4', 'landscape');
+
+        return $pdf->stream('Laporan Stok Obat Dinkes Filter.pdf');
+    }
+
+    public function pemusnahan_obat_dinkes2_filter()
+    {
+
+        return view('dinkes.pemusnahan_obat.dinkes_filter');
+    }
+
+    public function pemusnahan_obat_dinkes2_filter_cetak( Request $req)
+    {
+        $data         = Pemusnahan_obat::where('puskesmas_id', null)->whereBetween('tanggal_pemusnahan', [$req->tgl_awal, $req->tgl_akhir])->get();
+        $tgl_awal     = $req->tgl_awal;
+        $tgl_akhir    = $req->tgl_akhir ;
+
+        $pdf          = PDF::loadView('report.pemusnahan_obat_dinkes2_filter', ['data'=>$data,'tgl_awal'=>$tgl_awal,'tgl_akhir'=>$tgl_akhir,]);
+        $pdf->setPaper('a4', 'landscape');
+
+        return $pdf->stream('Laporan Pemusnahan Obat Dinkes Filter.pdf');
+    }
+
+    public function pengeluaran_obat_puskesmas_filter()
+    {
+
+        return view('puskesmas.pengeluaran_obat.filter');
+    }
+
+    public function pengeluaran_obat_puskesmas_filter_cetak( Request $req)
+    {
+        $data         = Pengeluaran_puskesmas::where('puskesmas_id', Auth::user()->puskesmas->id)->whereBetween('created_at', [$req->tgl_awal, $req->tgl_akhir])->get();
+        $tgl_awal     = $req->tgl_awal;
+        $tgl_akhir    = $req->tgl_akhir ;
+        $pdf          = PDF::loadView('report.pengeluaran_obat_puskesmas_filter', ['data'=>$data,'tgl_awal'=>$tgl_awal,'tgl_akhir'=>$tgl_akhir,]);
+        $pdf->setPaper('a4', 'landscape');
+
+        return $pdf->stream('Laporan Pengeluaran Obat Filter.pdf');
+    }
+
+    public function pemusnahan_obat_puskesmas_filter()
+    {
+
+        return view('puskesmas.pemusnahan_obat.filter');
+    }
+
+    public function pemusnahan_obat_puskesmas_filter_cetak( Request $req)
+    {
+        $data         = Pemusnahan_obat::where('puskesmas_id', Auth::user()->puskesmas->id)->whereBetween('tanggal_pemusnahan', [$req->tgl_awal, $req->tgl_akhir])->get();
+        $tgl_awal     = $req->tgl_awal;
+        $tgl_akhir    = $req->tgl_akhir ;
+        $pdf          = PDF::loadView('report.pemusnahan_obat_puskesmas', ['data'=>$data,'tgl_awal'=>$tgl_awal,'tgl_akhir'=>$tgl_akhir,]);
+        $pdf->setPaper('a4', 'landscape');
+
+        return $pdf->stream('Laporan Pengeluaran Obat Filter.pdf');
+    }
 }
  
