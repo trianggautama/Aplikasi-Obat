@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostKategoriRequest;
 use App\Models\Kategori_obat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KategoriObatController extends Controller
 {
@@ -27,7 +28,7 @@ class KategoriObatController extends Controller
      */
     public function create()
     {
-        //
+        // 
     }
 
     /**
@@ -40,8 +41,13 @@ class KategoriObatController extends Controller
     {
         Kategori_obat::create($req->all());
 
-        return redirect()->route('userDinkes.kategori.index')->with('success','Data Berhasil Disimpan');
-    }
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.kategori.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.kategori.index')->with('success','Data Berhasil Disimpan');
+        }
+    } 
 
     /**
      * Display the specified resource.
@@ -79,7 +85,12 @@ class KategoriObatController extends Controller
         $data = Kategori_obat::findOrFail($id);
         $data->update($req->all());
 
-        return redirect()->route('userDinkes.kategori.index')->with('success','Data Berhasil Diupdate');
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.kategori.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.kategori.index')->with('success','Data Berhasil Disimpan');
+        }    
     }
 
     /**
@@ -93,6 +104,11 @@ class KategoriObatController extends Controller
         $data = Kategori_obat::findOrFail($id);
         $data->delete();
 
-        return redirect()->route('userDinkes.kategori.index')->with('success','Data Berhasil Dihapus');
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.kategori.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.kategori.index')->with('success','Data Berhasil Disimpan');
+        }    
     }
 }

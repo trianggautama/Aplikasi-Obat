@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
     MainController,AuthController,UserPuskesmasController,DistribusiController,PemasukanPuskesmasController, PemusnahanObatController, StokPuskesmasController,ReportController,
+    AdminPemasukanObatController,AdminPengeluaranObatController
 };
 
 // Route::get('/', [MainController::class, 'depan'])->name('depan'); 
@@ -11,12 +12,35 @@ Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/', [AuthController::class, 'login_store'])->name('loginStore'); 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
 
-
-
 Route::prefix('/user-admin')->name('userAdmin.')->middleware('auth')->group(function (){
     Route::get('/beranda', [MainController::class, 'admin_beranda'])->name('beranda'); 
     Route::resource('dinkes', '\App\Http\Controllers\UserDinkesController');
     Route::resource('puskesmas', '\App\Http\Controllers\UserPuskesmasController');  
+    Route::resource('satuan', '\App\Http\Controllers\SatuanObatController');
+    Route::resource('kategori', '\App\Http\Controllers\KategoriObatController'); 
+    Route::resource('obat', '\App\Http\Controllers\ObatController'); 
+
+    Route::resource('stok_dinkes', '\App\Http\Controllers\StokDinkesController');
+    Route::resource('distribusi', '\App\Http\Controllers\DistribusiController');
+    Route::post('distribusi/obat/', [DistribusiController::class, 'tambah'])->name('distribusi.tambah');     
+    Route::resource('rincian_distribusi', '\App\Http\Controllers\RincianDistribusiController');
+
+    Route::prefix('/pemusnahan_obat_dinkes')->name('pemusnahan_obat_dinkes.')->group(function (){ 
+        Route::get('/dinkes', [PemusnahanObatController::class, 'pemusnahan_dinkes'])->name('index');  
+        Route::get('/puskesmas', [PemusnahanObatController::class, 'dinkes_index'])->name('puskesmas_index'); 
+        Route::get('/dinkes-show/{id}', [PemusnahanObatController::class, 'pemusnahan_dinkes_show'])->name('dinkes_show'); 
+        Route::get('/edit/{id}', [PemusnahanObatController::class, 'dinkes_edit'])->name('edit');  
+        Route::put('/edit/{id}', [PemusnahanObatController::class, 'dinkes_update'])->name('update');
+        Route::get('/show/{id}', [PemusnahanObatController::class, 'dinkes_show'])->name('show'); 
+        Route::get('/verifikasi/{id}', [PemusnahanObatController::class, 'verifikasi'])->name('verifikasi');  
+    });
+
+    Route::resource('pemasukan_obat', '\App\Http\Controllers\AdminPemasukanObatController');
+    Route::get('/pemasukan_obat/data/{id}', [AdminPemasukanObatController::class, 'data'])->name('pemasukan_obat.data');  
+
+    Route::resource('pengeluaran_obat', '\App\Http\Controllers\AdminPengeluaranObatController');
+    Route::get('/pengeluaran_obat/data/{id}', [AdminPengeluaranObatController::class, 'data'])->name('pengeluaran_obat.data');  
+
 });
 
 Route::prefix('/user-dinkes')->name('userDinkes.')->middleware('auth')->group(function (){
@@ -80,7 +104,7 @@ Route::prefix('/user-puskesmas')->name('userPuskesmas.')->middleware('auth')->gr
     Route::resource('rincian_pengeluaran', '\App\Http\Controllers\RincianPengeluaranController');
     Route::resource('pemusnahan_obat_puskesmas', '\App\Http\Controllers\PemusnahanObatController');
     Route::resource('rincian_pemusnahan', '\App\Http\Controllers\RincianPemusnahanController');
-
+ 
     Route::prefix('/report')->name('report.')->group(function (){
         Route::get('/stok_puskesmas', [ReportController::class, 'stok_puskesmas'])->name('stok_puskesmas'); 
         Route::get('/stok_puskesmas/{id}', [ReportController::class, 'stok_puskesmas_detail'])->name('stok_puskesmas_detail'); 

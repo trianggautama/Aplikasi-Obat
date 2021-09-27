@@ -7,6 +7,7 @@ use App\Models\Obat;
 use App\Models\Stok_dinkes;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StokDinkesController extends Controller
 {
@@ -60,7 +61,14 @@ class StokDinkesController extends Controller
         }
         $data['kode_stok']  = $obat->kode_obat.'.'.$idmax;
         Stok_dinkes::create($data);
-        return redirect()->route('userDinkes.stok_dinkes.index')->with('success','Data Berhasil Disimpan');
+
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.stok_dinkes.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.stok_dinkes.index')->with('success','Data Berhasil Disimpan');
+        }
+
     }
 
     /**
@@ -102,7 +110,13 @@ class StokDinkesController extends Controller
         $data = Stok_dinkes::findOrFail($id);
         $data->update($req->all());
 
-        return redirect()->route('userDinkes.stok_dinkes.index')->with('success','Data Berhasil di Ubah');
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.stok_dinkes.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.stok_dinkes.index')->with('success','Data Berhasil Disimpan');
+        }
+
     }
 
     /**
@@ -116,6 +130,12 @@ class StokDinkesController extends Controller
         $data = Stok_dinkes::findOrFail($id);
         $data->delete();
 
-        return redirect()->route('userDinkes.stok_dinkes.index')->with('success','Data Berhasil Dihapus');
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.stok_dinkes.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.stok_dinkes.index')->with('success','Data Berhasil Disimpan');
+        }
+
     }
 }

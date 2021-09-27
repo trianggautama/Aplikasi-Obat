@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostSatuanRequest;
 use App\Models\Satuan_obat;
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SatuanObatController extends Controller
 {
@@ -40,7 +41,12 @@ class SatuanObatController extends Controller
     {
         Satuan_obat::create($req->all());
 
-        return redirect()->route('userDinkes.satuan.index')->with('success','Data Berhasil Disimpan');
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.satuan.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userAdmin.satuan.index')->with('success','Data Berhasil Disimpan');
+        }
     }
 
     /**
@@ -79,7 +85,12 @@ class SatuanObatController extends Controller
         $data = Satuan_obat::findOrFail($id);
         $data->update($req->all());
 
-        return redirect()->route('userDinkes.satuan.index')->with('success','Data Berhasil Diupdate');
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.satuan.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userAdmin.satuan.index')->with('success','Data Berhasil Disimpan');
+        }
     }
 
     /**
@@ -93,6 +104,11 @@ class SatuanObatController extends Controller
         $data = Satuan_obat::findOrFail($id);
         $data->delete();
 
-        return redirect()->route('userDinkes.satuan.index')->with('success','Data Berhasil Dihapus');
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.satuan.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userAdmin.satuan.index')->with('success','Data Berhasil Disimpan');
+        }
     }
 }

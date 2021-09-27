@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Notifications\DistribusiNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 
 class DistribusiController extends Controller
@@ -63,8 +64,12 @@ class DistribusiController extends Controller
          
         Notification::send($penerima->user, new DistribusiNotification($notif)); 
 
-        return redirect()->route('userDinkes.distribusi.index')->with('success','Data Berhasil Disimpan');
-
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.distribusi.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.distribusi.index')->with('success','Data Berhasil Disimpan');
+        }
     } 
  
     /**
@@ -76,7 +81,7 @@ class DistribusiController extends Controller
     public function show($id)
     {
         $data       = Distribusi_obat::findOrFail($id);
-        $stok       = Stok_dinkes::orderBy('obat_id')->get();
+        $stok       = Stok_dinkes::where('volume','!=', 0)->orderBy('obat_id')->get();
         $rincian    = $data->rincian->map(function($q){
             if(Carbon::parse($q->tgl_exp) <= Carbon::now())
             {
@@ -116,7 +121,13 @@ class DistribusiController extends Controller
         $data = Distribusi_obat::findOrFail($id);
         $data->update($req->all());
 
-        return redirect()->route('userDinkes.distribusi.index')->with('success','Data Berhasil Disimpan');
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.distribusi.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.distribusi.index')->with('success','Data Berhasil Disimpan');
+        }
+
     }
 
     /**
@@ -129,7 +140,11 @@ class DistribusiController extends Controller
     {
          Distribusi_obat::findOrFail($id)->delete();
 
-        return redirect()->route('userDinkes.distribusi.index')->with('success','Data Berhasil Dihapus');
-
+         if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.distribusi.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.distribusi.index')->with('success','Data Berhasil Disimpan');
+        }
     }
 }

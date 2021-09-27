@@ -9,7 +9,7 @@
 
     <link href="{{asset('admin/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
-
+    <link href="{{asset('admin/css/plugins/select2/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('admin/css/style.css')}}" rel="stylesheet">
 
@@ -19,11 +19,16 @@
         <div style="padding-top: 150px;">
             <img src="{{asset('pemko.png')}}" alt="" width="70px" class="mb-3">
             <h3 class="m-0">Aplikasi Pendistribusian obat</h3>
-            <p class="m-0">Dinas Kesehatan Kota Banjarbaru</p>
+            <p class="m-0">Dinas Kesehatan Kota Banjarbaru</p> 
             <form class="m-t" role="form" action="{{Route('loginStore')}}" method="POST">
             @csrf
                 <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+                    <select name="username" id="username" class="form-control" required>
+                        <option value="">-- pilih username --</option>
+                        @foreach($user as $u)
+                            <option value="{{$u->username}}">{{$u->username}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
@@ -36,6 +41,10 @@
     <script src="{{asset('admin/js/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('admin/js/popper.min.js')}}"></script>
     <script src="{{asset('admin/js/bootstrap.js')}}"></script>
+    <script src="{{asset('admin/js/plugins/select2/select2.full.min.js')}}"></script>
+    <script>
+        $('#username').select2();
+    </script>
 
 </body>
 

@@ -40,14 +40,42 @@
                     <a href="{{Route('userAdmin.beranda')}}"><i class="fa fa-home"></i> <span class="nav-label">Beranda </span></a>
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Master Data</span> <span class="fa arrow"></span></a>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label"> Data User</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{Route('userAdmin.dinkes.index')}}">Admin Dinkes</a></li>
                         <li><a href="{{Route('userAdmin.puskesmas.index')}}">Puskesmas</a></li>
                     </ul>
                 </li>
+                <li> 
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Master Data</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{Route('userAdmin.satuan.index')}}">Satuan Obat</a></li>
+                        <li><a href="{{Route('userAdmin.kategori.index')}}">Kategori Obat</a></li>
+                        <li><a href="{{Route('userAdmin.obat.index')}}">Macam Obat</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Obat</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{Route('userAdmin.stok_dinkes.index')}}">Stok Obat</a></li>
+                        <li><a href="{{Route('userAdmin.distribusi.index')}}">Pendistribusian Obat</a></li>
+                        <li><a href="{{Route('userAdmin.pemusnahan_obat_dinkes.index')}}">Pemusnahan Obat Dinkes</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Puskesmas</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{Route('userAdmin.pemasukan_obat.index')}}">Pemasukan Obat</a></li>
+                        <li><a href="{{Route('userAdmin.pengeluaran_obat.index')}}">Pengeluaran Obat</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Laporan Puskesmas</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{Route('userAdmin.pemusnahan_obat_dinkes.puskesmas_index')}}">Pemusnahan Obat</a></li> 
+                    </ul>
+                </li>
                 @endif
-               
                 @if(Auth::user()->role ==  'Dinkes')
                     <li>
                         <a href="{{Route('userDinkes.beranda')}}"><i class="fa fa-home"></i> <span class="nav-label">Beranda </span></a>

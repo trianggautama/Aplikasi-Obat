@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <strong> Puskesmas</strong>
-                </li> 
+                </li>
                 <li class="breadcrumb-item">
                     <strong> Pemasukan obat</strong>
                 </li>
@@ -20,7 +20,7 @@
                 @if($data->status_distribusi == 1)
                     <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-check-circle-o"></i> Verifikasi pemasukan Obat</button>
                 @endif
-                <a href="{{Route('userPuskesmas.pemasukan.index')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Kembali</a>
+                <a href="{{Route('userAdmin.pemasukan_obat.index')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Kembali</a>
             </div> 
         </div>
     </div>

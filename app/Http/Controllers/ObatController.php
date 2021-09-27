@@ -50,7 +50,13 @@ class ObatController extends Controller
     public function store(PostObatRequest $req)
     {
         Obat::create($req->all());
-        return redirect()->route('userDinkes.obat.index')->with('success','Data Berhasil Disimpan');
+
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.obat.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.obat.index')->with('success','Data Berhasil Disimpan');
+        }
     }
 
     /**
@@ -76,7 +82,7 @@ class ObatController extends Controller
      */
     public function edit($id)
     {
-        $data = Obat::findOrFail($id);
+        $data       = Obat::findOrFail($id);
         $kategori   = $this->kategori;
         $satuan     = $this->satuan;
 
@@ -95,7 +101,12 @@ class ObatController extends Controller
         $data = Obat::findOrFail($id);
         $data->update($req->all());
 
-        return redirect()->route('userDinkes.obat.index')->with('success','Data Berhasil di Ubah');
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.obat.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.obat.index')->with('success','Data Berhasil Disimpan');
+        }    
     }
 
     /**
@@ -109,7 +120,12 @@ class ObatController extends Controller
         $data = Obat::findOrFail($id);
         $data->delete();
 
-        return redirect()->route('userDinkes.obat.index')->with('success','Data Berhasil Dihapus');
+        if(Auth::user()->role == 'SuperAdmin')
+        {
+            return redirect()->route('userAdmin.obat.index')->with('success','Data Berhasil Disimpan');
+        }else{
+            return redirect()->route('userDinkes.obat.index')->with('success','Data Berhasil Dihapus');
+        }    
     }
 }
  

@@ -48,7 +48,7 @@ class PemasukanPuskesmasController extends Controller
 
         return redirect()->route('userPuskesmas.pemasukan.index')->with('success','Data Berhasil Diverifikasi');
     }
-
+ 
     /**
      * Display the specified resource.
      *
@@ -57,7 +57,7 @@ class PemasukanPuskesmasController extends Controller
      */
     public function show($id)
     {
-        $data = Distribusi_obat::whereId($id)->first();
+        $data       = Distribusi_obat::whereId($id)->first();
         $rincian    = $data->rincian;
         return view('puskesmas.pemasukan.show',compact('data','rincian'));
     }
