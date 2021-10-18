@@ -141,7 +141,7 @@ class PemusnahanObatController extends Controller
         return redirect()->route('userDinkes.pemusnahan_obat_dinkes.index')->with('success','Data Berhasil Diupdate');
     }
 
-    /**
+    /** 
      * Remove the specified resource from storage.
      *
      * @param  int  $id

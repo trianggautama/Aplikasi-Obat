@@ -111,7 +111,7 @@ class ReportController extends Controller
 
     public function pemusnahan_obat_dinkes()
     {
-        $data       = Pemusnahan_obat::latest()->get();
+        $data = Pemusnahan_obat::where('puskesmas_id','!=', 0)->latest()->get();
         $pdf  = PDF::loadView('report.pemusnahan_obat_dinkes', ['data'=>$data]);
         $pdf->setPaper('a4', 'potrait'); 
         

@@ -96,7 +96,7 @@
                             <th>No</th>
                             <th>Puskesmas</th>
                             <th>Tanggal Pemusnahan</th>
-                            <th>Volume</th>
+                            <th>Volume</th> 
                             <th>Status</th>
                         </tr>
                     </thead> 
@@ -104,7 +104,7 @@
                         @foreach($data as $d)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$d->puskesmas->user->nama}}</td>
+                            <td>@if($d->puskesmas){{$d->puskesmas->user->nama}}@endif</td>
                             <td>{{Carbon\carbon::parse($d->tanggal_pemusnahan)->translatedFormat('d F Y')}}</td>
                             <td>{{$d->rincian->sum('volume')}} obat</td>
                             <td>
