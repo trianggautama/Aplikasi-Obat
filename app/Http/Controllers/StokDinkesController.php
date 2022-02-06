@@ -18,7 +18,7 @@ class StokDinkesController extends Controller
      */
     public function index()
     {
-        $data = Stok_dinkes::get()->map(function($q){
+        $data = Stok_dinkes::where('volume','>',0)->get()->map(function($q){
             if(Carbon::parse($q->tgl_exp) <= Carbon::now())
             {
                 $q->status_exp = 0; //kadaluarsa
